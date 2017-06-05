@@ -1,0 +1,175 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30/04/2016, 15:04:02
+    Author     : AX4B
+*/
+
+
+body {
+    background-image: url(../imagens/imagemxx.jpg);
+     background-size: cover;
+     background-size: 100% 115%;
+    background-repeat: no-repeat;
+    margin-bottom: 30px;
+    
+}
+/* #imgLogo{
+    border: 1px solid #000;
+    width: 135px; 
+    height: 130px;
+} */
+
+#imgLogo{
+    width: 500px; 
+    height: 500px;
+    top: -110%;
+    left: 20%;
+    position: absolute;
+}
+
+
+div#interface {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+    width: 900px;
+    height: 1000px;
+    margin: auto/*direita*/auto/*baixo*/auto/*esquerda*/auto;
+    box-shadow: /*Deslocamento lateral*/0px /*Deslocamento vertical*/0px /*Espalhamento da sombra*/10px /*Cor da sombra*/rgba(0,0,0,.5);
+    padding: 10px/*como todas as margens sao de 10px o parametro é passado uma unica vez*/;
+}
+
+
+header#cabecalho{
+    height: 150px;
+    width: 900px;
+    position: relative;
+    margin-bottom: -15px;
+    
+}
+header#logout{
+    width: 900px;
+    position: relative;
+    padding-bottom: -200px;
+    margin-top: -20px;
+    padding-left: 800px;
+    font-weight: bold;
+    color: red;
+}
+
+header#logado{
+	
+	right: -50px;
+    width: 900px;
+    position: relative;
+    padding-bottom: -200px;
+    margin-top: -10px;
+    padding-left: 690px;
+    font-weight: bold;
+}
+
+#imagemFundo>img{
+    height:1100px;
+    width: 100%;
+}
+
+header#imagemFundo{
+    height: 150px;
+    position: relative;
+}
+
+#imgMenuDinamico{
+    width: 400px;
+    height: 100px;
+}
+
+header#menuDinamico{
+    display: block;
+    height: 110px;
+    margin-top: 0px;
+    border: 1px solid #000;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+section#corpo {
+    background: #FFFFFF;
+    width: 710px;
+    height: 680px;
+    margin: 10px/*direita*/150px/*baixo*/0px/*esquerda*/170px;
+    box-shadow: /*Deslocamento lateral*/0px /*Deslocamento vertical*/0px /*Espalhamento da sombra*/1px /*Cor da sombra*/rgba(0,0,0,10);
+    padding: 10px/*como todas as margens sao de 10px o parametro é passado uma unica vez*/;
+}
+
+footer#rodape p{
+        text-align: center;/*centralizando paragrafo*/
+}
+
+	aside#menuLateral{
+    display: block;/*Mostrar a aside como um block*/
+    width: 50px;
+    float: left;/*flutua para o bloco para o lado esquerdo*/
+    padding: 10px;
+    margin-top: -690px;
+    margin-right: 3px;
+    padding-bottom: 0px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 150px;
+}
+
+li ul {
+    position: absolute;
+    left: 149px;
+    top: 0;
+    display: none;
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    color: #000000;
+    background: #FFFFFF;
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+ul li a:hover{
+    display: block;
+    text-decoration: none;
+    color: #0f0f0a;
+    background: #d6d6c2;
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    transition: 1s;
+}
+.footer {
+  position: absolute;
+  color: whitesmoke;
+  bottom: -50%;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  background-color: #77726f;
+}
+#tabela{
+    width: 700px;
+    margin: auto;
+    position: absolute;
+    top: 500px;
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#tabela table {
+  width: 690px;
+}
