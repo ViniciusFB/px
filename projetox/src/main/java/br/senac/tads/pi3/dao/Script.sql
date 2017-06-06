@@ -19,7 +19,12 @@ create table Produto(
     valorProduto DOUBLE NOT NULL,
     cadastradoPor VARCHAR(50) NOT NULL,
     dataCadastro TIMESTAMP NOT NULL,
-    disponivel boolean
+    disponivel BOOLEAN NOT NULL
+--     , nomeFilial VARCHAR(50) NOT NULL
+--     , idFilial (INT NOT NULL) UNIQUE
+--     , FOREIGN KEY (nomeFilial) REFERENCES Filial (nomeFilial)
+--     , FOREIGN KEY (idFilial) REFERENCES Filial (idFilial)
+  
 );
 
 create table Cliente (
@@ -76,22 +81,24 @@ create table Relatorio(
     vlFinal DOUBLE NOT NULL,
     valorProduto DOUBLE NOT NULL,
     quantProduto INT NOT NULL
-    FOREIGN KEY (nomeProduto) REFERENCES Produto(Nome),
+    FOREIGN KEY (nomeProduto) REFERENCES Produto(nomeProduto),
     FOREIGN KEY(nomeCliente) REFERENCES Cliente(nomeCliente),
-    FOREIGN KEY (tipoProduto) REFERENCES Produto(Tipo),
+    FOREIGN KEY (tipoProduto) REFERENCES Produto(tipo),
     FOREIGN KEY (venda) REFERENCES Venda(dataVenda),
     FOREIGN KEY (vlFinal) REFERENCES Venda(valorFinal),
-    FOREIGN KEY(valorProduto) REFERENCES Produto(Valor),
-    FOREIGN KEY(quantProduto) REFERENCES Produto(Quantidade)
+    FOREIGN KEY(valorProduto) REFERENCES Produto(valorProduto),
+    FOREIGN KEY(quantProduto) REFERENCES Produto(quantidade)
 );
 
 create table ProdutosExcluidos(
-    idExclusao INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+--     idExclusao INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idProduto INT NOT NULL UNIQUE,
     nomeProduto VARCHAR(50) NOT NULL,
     quantidade INT NOT NULL,
     valorProduto DOUBLE NOT NULL,
     excluidoPor VARCHAR(50) NOT NULL,
-    dataExclusao TIMESTAMP NOT NULL
+    dataExclusao TIMESTAMP NOT NULL,
+    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
 );
 -- create table VendaProd(
 --    idVendaProd INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
@@ -105,9 +112,21 @@ create table ProdutosExcluidos(
 -- );
 
 
-INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto71', 39, 'bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
-INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto52', 38, 'bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
-INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto23', 81, 'bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
-INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto74', 8421, 'bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
-INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produt75', 2931, 'bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
-INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produt66', 2891, 'bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto01', 369, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto542', 318, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto233', 181, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto724', 58421, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produt755', 72931, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produt636', 52891, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto741', 439, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto5432', 4338, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto2433', 3481, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto7434', 28421, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produt7225', 12931, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produt6226', 62891, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produt2o71', 8739, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Prod2uto52', 0838, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Pr1oduto23', 881, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Pro2duto74', 98421, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Prod2ut75', 92931, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+-- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Pro2dut66', 29891, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);

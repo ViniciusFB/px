@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Vinicius Ferreira Batista
  */
-@WebServlet(name = "AlterarProdutoServlet01", urlPatterns = {"/AlterarProdutoServlet01"})
-public class AlterarProdutoServlet01 extends HttpServlet {
+@WebServlet(name = "ExcluirProdutoServlet", urlPatterns = {"/ExcluirProdutoServlet"})
+public class ExcluirProdutoServlet extends HttpServlet {
 
     /**
      * Neste exemplo, somente apresenta a tela do formulário
@@ -45,23 +44,36 @@ public class AlterarProdutoServlet01 extends HttpServlet {
             throws ServletException, IOException {
         ProdutoDAO dao = new ProdutoDAO();
         Produto produto = null;
+        int id = Integer.parseInt(request.getParameter("idProduto"));
 
         try {
             produto = new Produto((Produto) dao.obterProduto(Integer.parseInt(request.getParameter("idProduto"))));
-        } catch (NullPointerException | NumberFormatException e) {
-            System.out.println(e);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/ErroGenerico.jsp").forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AlterarProdutoServlet01.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExcluirProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("id", produto.getId());
-        request.setAttribute("nome", produto.getNome());
-        request.setAttribute("codigo", produto.getCodigo());
-        request.setAttribute("valor", produto.getValor());
-        request.setAttribute("tipo", produto.getTipo());
-        request.setAttribute("quantidade", produto.getQuantidade());
-        request.setAttribute("descricao", produto.getDescricao());
-        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/alterarProduto.jsp").forward(request, response);
+
+        String funcionario = request.getParameter("funcio");
+        String nome = produto.getNome();
+        int quantidade = produto.getQuantidade();
+        double valor = produto.getValor();
+     //   HttpSession sessao = request.getSession();
+      //  request.setAttribute("usuario", sessao.getAttribute("usuario"));
+     //   String funcionario = (String) sessao.getAttribute("nomeCompleto");  Aqui retorna null porque
+        // esse get pega todo o conteúdo do UsuarioSistema. Nome, nomeCompleto e senha!
+        // Para resolver, dar um jeito de pegar só esse nomeCompleto
+
+        produto = new Produto(id, nome, quantidade, valor, funcionario, new Date());
+
+        dao.adicionarExclusao(produto);
+
+        dao.excluirProduto((id));
+        request.setAttribute("produto", "Produto: ''" + nome + "'' foi removido com sucesso!!");
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ExcluirProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -76,7 +88,7 @@ public class AlterarProdutoServlet01 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        request.setAttribute("usuarioLogado", sessao.getAttribute("usuarioLogado"));
+        request.setAttribute("usuario", sessao.getAttribute("usuario"));
 
     }
 

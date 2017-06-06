@@ -15,10 +15,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Projeto X
+ * @author ProjetoX
  */
-@WebServlet(name = "CadastraProdServlet01", urlPatterns = {"/CadastrarProdServlet01"})
-public class CadastrarProdServlet01 extends HttpServlet {
+@WebServlet(name = "CadastraProdutoServlet01", urlPatterns = {"/CadastrarProdutoServlet01"})
+public class CadastrarProdutoServlet01 extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

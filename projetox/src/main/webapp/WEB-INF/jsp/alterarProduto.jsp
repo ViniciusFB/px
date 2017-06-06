@@ -38,17 +38,8 @@
             </header>
             <section id="corpo">
                 <legend>Alterar Produto</legend>
-                <form class="form-inline" action="AlterarProdutoServlet02" method="post" id="form_cadastro">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <label class="input-group-addon" for="nomeProduto">ID do Produto:</label>
-                            <input style="width: 200px;" type="text" pattern="[0-9]+$" value="${id}" name="idProduto" id="produto" placeholder="ID do produto a ser alterado" class="form-control" >
 
-                        </div>
-                        <input type="submit" value='Pesquisar' name="alterarBotao" class="btn btn-info"/>
 
-                    </div>
-                </form><br>
                 <form class="form-horizontal" action="AlterarProdutoServlet02" method="post" id="form_cadastro">
 
                     <center>
@@ -62,7 +53,7 @@
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                            <input name="id" class="form-control"  type="text" value="${id}" readonly="true">
+                                            <input name="id" class="form-control" required type="text" value="${id}" readonly="true">
                                         </div>
                                     </div>
                                 </div> 
@@ -71,7 +62,7 @@
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                                            <input  name="nome"class="form-control"  type="text" value="${nome}">
+                                            <input  name="nome"class="form-control" required type="text" value="${nome}">
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +72,7 @@
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                            <input name="codigo" class="form-control"  type="text" value="${codigo}" readonly="true">
+                                            <input name="codigo" class="form-control" required type="text" value="${codigo}" readonly="true">
                                         </div>
                                     </div>
                                 </div> 
@@ -93,7 +84,7 @@
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                                            <input name="valor" class="form-control"  type="text" value="${valor}">
+                                            <input name="valor" class="form-control" required type="text" value="${valor}">
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +94,7 @@
                                     <div class="col-md-4 selectContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="tipo" class="form-control selectpicker" readonly="true">
+                                            <select name="tipo" class="form-control selectpicker" required readonly="true">
                                                 <option value="${tipo}" selected>${tipo}</option>
                                             </select>
                                         </div>
@@ -116,7 +107,7 @@
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-sort"></i></span>
-                                            <input name="quantidade" class="form-control" type="number" value="${quantidade}">
+                                            <input name="quantidade" class="form-control" required type="number" min="1" max="1000" value="${quantidade}">
                                         </div>
                                     </div>
                                 </div>
@@ -154,18 +145,15 @@
 
             <aside id="menuLateral">
                 <ul>
-                    <li><a href="/projetox/CadastrarProdServlet01">CADASTRAR<br>PRODUTO</a></li> <!-- // Estoque, ADM -->
-                    <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> <!-- // Estoque, ADM. Sendo que o Estoque pode remover e alterar produtos. -->
-                    <li><a href="/projetox/AlterarProdutoServlet01">ALTERAR<br>PRODUTO</a></li> <!-- // Mesma coisa de cima -->
-                    <li><a href="/projetox/RemoveProdutoServlet01">REMOVER<br>PRODUTO</a></li><!-- // Mesma coisa de cima -->
-                    <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> <!-- // Vendedor -->
+                    <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
+                    <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> 
+                    <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> 
                     <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTO</a></li>
-                    <!--	// Estoque. Maneira rápida de aumentar quantidade de produtos. Só apresentar informações básicas que não podem ser preenchidas e um campo de quantidade para ser ADICIONADA. (ADICIONADA NÃO É MODIFICADA, OU SEJA, SERÁ FEITA UMA SOMA)  -->
-                    <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> <!-- Administrador -->
-                    <li><a href="/projetox/CadastrarFuncServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> <!-- Administrador -->
-                    <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> <!-- Funcionário X ou Y. Talvez Vendedor -->
-                    <li><a href="/projetox/CadastraFuncServlet01">CONSULTAR<br>CLIENTES</a></li> <!-- Adm e Vendedores -->
-                    <li><a href="/projetox/GeraRelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> <!-- Administrador, Estoquista. Mas o estoquista não pode gerar todos os relatórios -->
+                    <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> 
+                    <li><a href="/projetox/CadastrarFuncServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
+                    <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> 
+                    <li><a href="/projetox/CadastraFuncServlet01">CONSULTAR<br>CLIENTES</a></li> 
+                    <li><a href="/projetox/RelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> 
                 </ul>
             </aside>
         </div>

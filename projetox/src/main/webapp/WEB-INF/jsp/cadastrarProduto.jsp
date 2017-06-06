@@ -22,7 +22,7 @@
         <link rel="shortcut icon" type="image/png" href="imagens/favicon.png"/>
     </head>
     <body>
-       <div id="interface">
+        <div id="interface">
             <header id="logado">
                 <p>Usuário logado: ${sessionScope.usuario.nomeCompleto}!</p>
             </header>
@@ -104,7 +104,7 @@
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-sort"></i></span>
-                                            <input name="quantidade" required placeholder="Quantidade" class="form-control"  type="number">
+                                            <input name="quantidade" required placeholder="Quantidade" min="1" max="1000" class="form-control"  type="number">
                                         </div>
                                     </div>
                                 </div>
@@ -144,18 +144,15 @@
             </section>
             <aside id="menuLateral">
                 <ul>
-                    <li><a href="/projetox/CadastrarProdServlet01">CADASTRAR<br>PRODUTO</a></li> <!-- // Estoque, ADM -->
-                    <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> <!-- // Estoque, ADM. Sendo que o Estoque pode remover e alterar produtos. -->
-                    <li><a href="/projetox/AlterarProdutoServlet01">ALTERAR<br>PRODUTO</a></li> <!-- // Mesma coisa de cima -->
-                    <li><a href="/projetox/RemoveProdutoServlet01">REMOVER<br>PRODUTO</a></li><!-- // Mesma coisa de cima -->
-                    <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> <!-- // Vendedor -->
+                    <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
+                    <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> 
+                    <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> 
                     <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTO</a></li>
-                    <!--	// Estoque. Maneira rápida de aumentar quantidade de produtos. Só apresentar informações básicas que não podem ser preenchidas e um campo de quantidade para ser ADICIONADA. (ADICIONADA NÃO É MODIFICADA, OU SEJA, SERÁ FEITA UMA SOMA)  -->
-                    <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> <!-- Administrador -->
-                    <li><a href="/projetox/CadastrarFuncServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> <!-- Administrador -->
-                    <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> <!-- Funcionário X ou Y. Talvez Vendedor -->
-                    <li><a href="/projetox/CadastraFuncServlet01">CONSULTAR<br>CLIENTES</a></li> <!-- Adm e Vendedores -->
-                    <li><a href="/projetox/GeraRelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> <!-- Administrador, Estoquista. Mas o estoquista não pode gerar todos os relatórios -->
+                    <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> 
+                    <li><a href="/projetox/CadastrarFuncServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
+                    <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> 
+                    <li><a href="/projetox/CadastraFuncServlet01">CONSULTAR<br>CLIENTES</a></li> 
+                    <li><a href="/projetox/RelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> 
                 </ul>
             </aside>
 

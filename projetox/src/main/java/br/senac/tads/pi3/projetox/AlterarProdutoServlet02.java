@@ -56,48 +56,25 @@ public class AlterarProdutoServlet02 extends HttpServlet {
         ProdutoDAO dao = new ProdutoDAO();
         HttpSession sessao = request.getSession();
 
-        request.setAttribute("usuarioLogado", sessao.getAttribute("usuarioLogado"));
+        request.setAttribute("usuario", sessao.getAttribute("usuario"));
 
-        try {
-            String operacao = request.getParameter("alterarBotao");
-            if (operacao.equals("Pesquisar")) {
-                try {
-                    produto = new Produto((Produto) dao.obterProduto(Integer.parseInt(request.getParameter("idProduto"))));
-                } catch (NullPointerException | NumberFormatException e) {
-                    System.out.println(e);
-                    this.getServletContext().getRequestDispatcher("/WEB-INF/ErroGenerico.jsp").forward(request, response);
-                }
-                request.setAttribute("id", produto.getId());
-                request.setAttribute("nome", produto.getNome());
-                request.setAttribute("codigo", produto.getCodigo());
-                request.setAttribute("valor", produto.getValor());
-                request.setAttribute("tipo", produto.getTipo());
-                request.setAttribute("quantidade", produto.getQuantidade());
-                request.setAttribute("descricao", produto.getDescricao());
-                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/alterarProduto.jsp").forward(request, response);
-            } else {
-                int id = Integer.parseInt(request.getParameter("id"));
-                String nome = request.getParameter("nome");
-                String tipo = request.getParameter("tipo");
-                int quantidade = Integer.parseInt(request.getParameter("quantidade"));
-                String descricao = request.getParameter("descricao");
-                double valor = Double.parseDouble(request.getParameter("valor"));
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        String tipo = request.getParameter("tipo");
+        int quantidade = Integer.parseInt(request.getParameter("quantidade"));
+        String descricao = request.getParameter("descricao");
+        double valor = Double.parseDouble(request.getParameter("valor"));
 
-                produto = new Produto(id, nome, valor, quantidade, tipo, descricao);
+        produto = new Produto(id, nome, valor, quantidade, tipo, descricao);
 
 //            ProdutoDAO dao = new ProdutoDAO();
-                dao.atualizarProduto(produto);
-                request.setAttribute("produto", "Produto: " + request.getParameter("nome") + " alterado com sucesso!!");
+        dao.atualizarProduto(produto);
+        request.setAttribute("produto", "Produto: ''" + request.getParameter("nome") + "'' foi alterada com sucesso!!");
 
 //                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);
-                RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("/WEB-INF/jsp/estoque.jsp");
-                dispatcher.forward(request, response);
-            }
-        } catch (NumberFormatException | SQLException | ServletException | IOException e) {
-            System.out.println(e);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/ErroGenerico.jsp").forward(request, response);
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/WEB-INF/jsp/estoque.jsp");
+        dispatcher.forward(request, response);
 
-        }
     }
 }

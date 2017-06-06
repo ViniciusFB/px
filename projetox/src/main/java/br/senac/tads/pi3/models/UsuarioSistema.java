@@ -23,6 +23,7 @@
  */
 package br.senac.tads.pi3.models;
 
+import br.senac.tads.pi3.dao.FuncionarioDAO;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,78 +36,96 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class UsuarioSistema {
 
-  private static final Map<String, UsuarioSistema> USUARIOS_CADASTRADOS;
+    private static final Map<String, UsuarioSistema> USUARIOS_CADASTRADOS;
 
-   static {
-    USUARIOS_CADASTRADOS = new LinkedHashMap<>();
-    USUARIOS_CADASTRADOS.put("madruga", new UsuarioSistema("madruga",
-	    "Seu Madruga", "pagueoaluguel", new String[]{"BASICO"}));
-    USUARIOS_CADASTRADOS.put("admin", new UsuarioSistema("admin",
-	    "Administrador", "admin", new String[]{"BASICO", "ADMIN"}));
-  }
+    static {
+        USUARIOS_CADASTRADOS = new LinkedHashMap<>();
+        USUARIOS_CADASTRADOS.put("madruga", new UsuarioSistema("madruga",
+                "Seu Madruga", "pagueoaluguel", new String[]{"BASICO"}));
+        USUARIOS_CADASTRADOS.put("admin", new UsuarioSistema("admin",
+                "Administrador", "admin", new String[]{"BASICO", "ADMIN"}));
+        USUARIOS_CADASTRADOS.put("vinicius", new UsuarioSistema("vinicius",
+                "Vinicius", "vinicius", new String[]{"BASICO", "ADMIN"}));
+//
+//        Funcionario funcio = new Funcionario();
+//
+//        FuncionarioDAO dao = new FuncionarioDAO();
+//        funcio = new Funcionario((Funcionario) dao.obterFuncionario(Integer.parseInt("idFuncionario")));
 
-  private String usuario;
-
-  private String nomeCompleto;
-
-  private String hashSenha;
-
-  private String[] papeis; // ROLES
-
-  public UsuarioSistema() {
-
-  }
-
-  public UsuarioSistema(String usuario, String nomeCompleto, String senha, String[] papeis) {
-    this.usuario = usuario;
-    this.nomeCompleto = nomeCompleto;
-    setSenha(senha);
-    this.papeis = papeis;
-  }
-
-  public String getUsuario() {
-    return usuario;
-  }
-
-  public void setUsuario(String usuario) {
-    this.usuario = usuario;
-  }
-
-  public String getNomeCompleto() {
-    return nomeCompleto;
-  }
-
-  public void setNomeCompleto(String nomeCompleto) {
-    this.nomeCompleto = nomeCompleto;
-  }
-
-  public String getHashSenha() {
-    return hashSenha;
-  }
-
-  public final void setSenha(String senha) {
-    this.hashSenha = BCrypt.hashpw(senha, BCrypt.gensalt());
-  }
-
-  public String[] getPapeis() {
-    return papeis;
-  }
-
-  public void setPapeis(String[] papeis) {
-    this.papeis = papeis;
-  }
-  
-  public boolean temPapel(String papel) {
-    List<String> papeisUsuario = Arrays.asList(papeis);
-    return papeisUsuario.contains(papel);
-  }
-
-  public static UsuarioSistema obterUsuario(String usuario, String senha) {
-    UsuarioSistema usuarioEncontrado = USUARIOS_CADASTRADOS.get(usuario);
-    if (usuarioEncontrado != null && BCrypt.checkpw(senha, usuarioEncontrado.getHashSenha())) {
-      return usuarioEncontrado;
+//    USUARIOS_CADASTRADOS.put(funcio.getLogin(), new UsuarioSistema(funcio.getLogin(),
+//	    funcio.getNome(), funcio.getSenha(), new String[]{"BASICO", "ADMIN"}));
+//
+//if (funcio.getCargo().equals("ADMIN")) {
+//        USUARIOS_CADASTRADOS.put(funcio.getLogin(), new UsuarioSistema(funcio.getLogin(),
+//	    funcio.getNome(), funcio.getSenha(), new String[]{"BASICO", "ADMIN"}));
+//    
+//} else if (funcio.getCargo().equals("GERENT")) {
+//    
+//}
     }
-    return null;
-  }
+
+    private String usuario;
+
+    private String nomeCompleto;
+
+    private String hashSenha;
+
+    private String[] papeis; // ROLES
+
+    public UsuarioSistema() {
+
+    }
+
+    public UsuarioSistema(String usuario, String nomeCompleto, String senha, String[] papeis) {
+        this.usuario = usuario;
+        this.nomeCompleto = nomeCompleto;
+        setSenha(senha);
+        this.papeis = papeis;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getHashSenha() {
+        return hashSenha;
+    }
+
+    public final void setSenha(String senha) {
+        this.hashSenha = BCrypt.hashpw(senha, BCrypt.gensalt());
+    }
+
+    public String[] getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(String[] papeis) {
+        this.papeis = papeis;
+    }
+
+    public boolean temPapel(String papel) {
+        List<String> papeisUsuario = Arrays.asList(papeis);
+        return papeisUsuario.contains(papel);
+    }
+
+    public static UsuarioSistema obterUsuario(String usuario, String senha) {
+        UsuarioSistema usuarioEncontrado = USUARIOS_CADASTRADOS.get(usuario);
+        if (usuarioEncontrado != null && BCrypt.checkpw(senha, usuarioEncontrado.getHashSenha())) {
+            return usuarioEncontrado;
+        }
+        return null;
+    }
 
 }

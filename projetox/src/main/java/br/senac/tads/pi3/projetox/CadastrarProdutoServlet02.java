@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -51,6 +52,8 @@ public class CadastrarProdutoServlet02 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         boolean erro = false;
+        HttpSession sessao = request.getSession();
+        request.setAttribute("usuario", sessao.getAttribute("usuario"));
 
         String nome = request.getParameter("nome");
         if (nome == null || nome.length() < 1 || nome.equals("")) {
@@ -78,7 +81,7 @@ public class CadastrarProdutoServlet02 extends HttpServlet {
             ProdutoDAO dao = new ProdutoDAO();
             dao.incluirComTransacao(novo);
 
-            request.setAttribute("produto", "Produto: " + request.getParameter("nome") + " cadastrado com sucesso!!");
+            request.setAttribute("produto", "Produto: ''" + request.getParameter("nome") + "'' foi cadastrado com sucesso!!");
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/cadastrarProduto.jsp").forward(request, response);
 
         } else {

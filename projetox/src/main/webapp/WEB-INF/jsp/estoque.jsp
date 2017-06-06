@@ -4,6 +4,7 @@
     Author     : Vinicius Ferreira Batista
 --%>
 
+<%@page import="br.senac.tads.pi3.models.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -46,7 +47,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="input-group-addon" for="filial">Filial: </label>
-                                <select required name="filial" class="form-control selectpicker">
+                                <select name="filial" class="form-control selectpicker">
                                     <option value="" disabled selected>Selecione uma filial...</option>
                                     <option>OPÇÃO1</option>
                                     <option>OPÇÃO2</option>
@@ -55,66 +56,62 @@
 
                                 </select>
                             </div>
-                                <div class="input-group">
-                                    <label class="input-group-addon" for="nomeProduto">Nome do Produto:</label>
-                                    <input type="text" name="nomeProduto" id="nomeProduto" placeholder="Produto a ser Pesquisado" class="form-control" style="width: 200px;"/>
-                                </div>
-
-                                <button name="validar" id="validar" class="btn btn-info">Pesquisar</button></p>
-
+                            <div class="input-group">
+                                <label class="input-group-addon" for="nomeProduto">Nome do Produto:</label>
+                                <input type="text" name="nomeProduto" id="nomeProduto" placeholder="Produto a ser Pesquisado" class="form-control" style="width: 200px;"/>
                             </div>
-                            </br>
-                            <hr style="height:1px; background-color:#E8E8E8;">
-                            <c:if test = "${pesquisa != null}">
-                                <div id="tabela" >
-                                    <table border="1">
+
+                            <button name="validar" id="validar" class="btn btn-info">Pesquisar</button></p>
+
+                        </div>
+                        </br>
+                        <hr style="height:1px; background-color:#E8E8E8;">
+                        ${produto}
+                        <c:if test = "${pesquisa != null}">
+                            <div id="tabela" >
+                                <table border="1">
+                                    <tr>
+                                        <th style="text-align: center">ID</th>
+                                        <th style="text-align: center">NOME</th>
+                                        <th style="text-align: center">TIPO</th>
+                                        <th style="text-align: center;">QTDE</th>
+                                        <th style="text-align: center">VALOR</th>
+                                        <th style="text-align: center">OP</th>
+                                        <th style="text-align: center">OP</th>
+                                    </tr>
+
+                                    <c:forEach items="${pesquisa}" var="produto">
                                         <tr>
-                                            <th style="text-align: center">ID</th>
-                                            <th style="text-align: center">NOME</th>
-                                            <th style="text-align: center">TIPO</th>
-                                            <th style="text-align: center;">QTDE</th>
-                                            <th style="text-align: center">VALOR</th>
-                                            <th style="text-align: center">OP</th>
-                                            <th style="text-align: center">OP</th>
+
+                                            <td style="text-align: center"><c:out value="${produto.id}" /></td>
+                                            <td style="text-align: center"><c:out value="${produto.nome}" /></td>
+                                            <td style="text-align: center"><c:out value="${produto.tipo}" /></td>
+                                            <td style="text-align: center"><c:out value="${produto.quantidade}" /></td>
+                                            <td style="text-align: center"><c:out value="${produto.valor}" /></td>
+
+
+                                            <td style="text-align: center" id="alterar"><a href="AlterarProdutoServlet01?idProduto=${produto.id}">Alterar</a></td>
+                                            <td style="text-align: center" id="excluir"><a href="ExcluirProdutoServlet?idProduto=${produto.id}&funcio=${sessionScope.usuario.nomeCompleto}">Excluir</a></td>
+                                            <!--<td style="text-align: center" id="excluir"><a href="ExcluirProdutoServlet?idProduto=${produto.id}">Excluir</a></td>--> 
                                         </tr>
-
-                                        <c:forEach items="${pesquisa}" var="produto">
-                                            <tr>
-
-                                                <td style="text-align: center"><c:out value="${produto.id}" /></td>
-                                                <td style="text-align: center"><c:out value="${produto.nome}" /></td>
-                                                <td style="text-align: center"><c:out value="${produto.tipo}" /></td>
-                                                <td style="text-align: center"><c:out value="${produto.quantidade}" /></td>
-                                                <td style="text-align: center"><c:out value="${produto.valor}" /></td>
-
-
-                                                <td style="text-align: center" id="alterar"><a href="AlterarProdutoServlet01?idProduto=${produto.id}" >Alterar</a></td>
-                                                <td style="text-align: center" id="excluir"><a href="ExcluirProdutoServlet?idProduto=${produto.id}">Excluir</a></td>
-
-
-
-                                            </tr>
-                                        </c:forEach>                                                  
-                                    </table>
-                                </div>
-                            </c:if>
+                                    </c:forEach>                                                  
+                                </table>
+                            </div>
+                        </c:if>
                     </fieldset>
                 </form>
             </section>
             <aside id="menuLateral">
                 <ul>
-                    <li><a href="/projetox/CadastrarProdServlet01">CADASTRAR<br>PRODUTO</a></li> <!-- // Estoque, ADM -->
-                    <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> <!-- // Estoque, ADM. Sendo que o Estoque pode remover e alterar produtos. -->
-                    <li><a href="/projetox/AlterarProdutoServlet01">ALTERAR<br>PRODUTO</a></li> <!-- // Mesma coisa de cima -->
-                    <li><a href="/projetox/RemoveProdutoServlet01">REMOVER<br>PRODUTO</a></li><!-- // Mesma coisa de cima -->
-                    <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> <!-- // Vendedor -->
+                    <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
+                    <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> 
+                    <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> 
                     <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTO</a></li>
-                    <!--	// Estoque. Maneira rápida de aumentar quantidade de produtos. Só apresentar informações básicas que não podem ser preenchidas e um campo de quantidade para ser ADICIONADA. (ADICIONADA NÃO É MODIFICADA, OU SEJA, SERÁ FEITA UMA SOMA)  -->
-                    <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> <!-- Administrador -->
-                    <li><a href="/projetox/CadastrarFuncServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> <!-- Administrador -->
-                    <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> <!-- Funcionário X ou Y. Talvez Vendedor -->
-                    <li><a href="/projetox/CadastraFuncServlet01">CONSULTAR<br>CLIENTES</a></li> <!-- Adm e Vendedores -->
-                    <li><a href="/projetox/GeraRelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> <!-- Administrador, Estoquista. Mas o estoquista não pode gerar todos os relatórios -->
+                    <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> 
+                    <li><a href="/projetox/CadastrarFuncServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
+                    <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> 
+                    <li><a href="/projetox/CadastraFuncServlet01">CONSULTAR<br>CLIENTES</a></li> 
+                    <li><a href="/projetox/RelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> 
                 </ul>
             </aside>
 

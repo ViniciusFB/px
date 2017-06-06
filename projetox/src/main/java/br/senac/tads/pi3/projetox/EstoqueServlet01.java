@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author JavaHell
+ * @author ProjetoX
  */
 @WebServlet(name = "EstoqueServlet01", urlPatterns = {"/EstoqueServlet01"})
 public class EstoqueServlet01 extends HttpServlet {
