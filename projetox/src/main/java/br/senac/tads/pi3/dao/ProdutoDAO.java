@@ -202,36 +202,36 @@ public class ProdutoDAO extends ConexaoBD {
         }
         return lista;
     }
-    
+
     public List<Produto> pesquisarProduto(String nome) throws SQLException, ClassNotFoundException {
-        
-         PreparedStatement stmt = null;
+
+        PreparedStatement stmt = null;
         Connection conn = null;
         String sql = "SELECT idProduto, nomeProduto, tipoProduto, quantidade, valorProduto "
-                + "FROM Produto WHERE disponivel = 'true' AND nomeProduto = ? ";
+                + "FROM Produto WHERE disponivel = 'true' AND UPPER(nomeProduto) LIKE UPPER(?) ";
+
         List<Produto> lista = new ArrayList<>();
         try {
             conn = obterConexao();
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nome);
-            
+            stmt.setString(1, "%" + nome + "%");
 
             ResultSet resultados = stmt.executeQuery();
 
             while (resultados.next()) {
-                
-                 int id = resultados.getInt("idProduto");
+
+                int id = resultados.getInt("idProduto");
                 String nomeP = resultados.getString("nomeProduto");
                 String tipo = resultados.getString("tipoProduto");
                 int quantidade = resultados.getInt("quantidade");
                 double valor = resultados.getDouble("valorProduto");
-                
+
                 lista.add(new Produto(id, nomeP, tipo, quantidade, valor));
             }
         } catch (SQLException | NumberFormatException e) {
             System.out.println(e);
         } finally {
-            
+
             if (stmt != null) {
                 try {
                     stmt.close();

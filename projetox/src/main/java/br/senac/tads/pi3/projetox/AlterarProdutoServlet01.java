@@ -46,7 +46,7 @@ public class AlterarProdutoServlet01 extends HttpServlet {
 //        ProdutoDAO produto = new ProdutoDAO();
 //        Produto envia = produto.obterProduto(Integer.parseInt(request.getParameter("idProduto")));
 //        request.setAttribute("prod", envia);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarProd.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarProduto.jsp");
         dispatcher.forward(request, response);
 
         try {

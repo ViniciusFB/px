@@ -62,7 +62,7 @@ public class AlterarProdutoServlet02 extends HttpServlet {
             String operacao = request.getParameter("alterarBotao");
             if (operacao.equals("Pesquisar")) {
                 try {
-                    produto = new Produto((Produto) dao.obterProduto(Integer.parseInt(request.getParameter("nomeProduto"))));
+                    produto = new Produto((Produto) dao.obterProduto(Integer.parseInt(request.getParameter("idProduto"))));
                 } catch (NullPointerException | NumberFormatException e) {
                     System.out.println(e);
                     this.getServletContext().getRequestDispatcher("/WEB-INF/ErroGenerico.jsp").forward(request, response);
@@ -74,7 +74,7 @@ public class AlterarProdutoServlet02 extends HttpServlet {
                 request.setAttribute("tipo", produto.getTipo());
                 request.setAttribute("quantidade", produto.getQuantidade());
                 request.setAttribute("descricao", produto.getDescricao());
-                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/alterarProd.jsp").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/alterarProduto.jsp").forward(request, response);
             } else {
                 int id = Integer.parseInt(request.getParameter("id"));
                 String nome = request.getParameter("nome");

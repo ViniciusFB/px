@@ -15,7 +15,6 @@ body {
      background-size: 100% 115%;
     background-repeat: no-repeat;
     margin-bottom: 30px;
-    
 }
 /* #imgLogo{
     border: 1px solid #000;
@@ -36,7 +35,7 @@ div#interface {
     position: relative;
     background-color: rgba(255, 255, 255, 0.8);
     overflow: hidden;
-    width: 900px;
+    width: 1000px;
     height: 1000px;
     margin: auto/*direita*/auto/*baixo*/auto/*esquerda*/auto;
     box-shadow: /*Deslocamento lateral*/0px /*Deslocamento vertical*/0px /*Espalhamento da sombra*/10px /*Cor da sombra*/rgba(0,0,0,.5);
@@ -97,7 +96,7 @@ header#menuDinamico{
 
 section#corpo {
     background: #FFFFFF;
-    width: 710px;
+    width: 800px;
     height: 680px;
     margin: 10px/*direita*/150px/*baixo*/0px/*esquerda*/170px;
     box-shadow: /*Deslocamento lateral*/0px /*Deslocamento vertical*/0px /*Espalhamento da sombra*/1px /*Cor da sombra*/rgba(0,0,0,10);
