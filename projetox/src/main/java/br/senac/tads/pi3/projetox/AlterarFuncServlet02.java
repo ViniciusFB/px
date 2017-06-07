@@ -5,10 +5,10 @@
  */
 package br.senac.tads.pi3.projetox;
 
-import br.senac.tads.pi3.dao.ProdutoDAO;
-import br.senac.tads.pi3.models.Produto;
+import br.senac.tads.pi3.dao.FuncionarioDAO;
+import br.senac.tads.pi3.models.Funcionario;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author vinicius.fbatista1
  */
-@WebServlet(name = "AlterarProdutoServlet02", urlPatterns = {"/AlterarProdutoServlet02"})
-public class AlterarProdutoServlet02 extends HttpServlet {
+@WebServlet(name = "AlterarFuncServlet02", urlPatterns = {"/AlterarFuncServlet02"})
+public class AlterarFuncServlet02 extends HttpServlet {
 
     /**
      * Neste exemplo, somente apresenta a tela do formulário
@@ -52,27 +52,29 @@ public class AlterarProdutoServlet02 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         boolean erro = false;
-        Produto produto = null;
-        ProdutoDAO dao = new ProdutoDAO();
+        Funcionario funcionario = null;
+        FuncionarioDAO dao = new FuncionarioDAO();
         HttpSession sessao = request.getSession();
 
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
 
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
-        String tipo = request.getParameter("tipo");
-        int quantidade = Integer.parseInt(request.getParameter("quantidade"));
-        String descricao = request.getParameter("descricao");
-        double valor = Double.parseDouble(request.getParameter("valor"));
+        String sobrenome = request.getParameter("sobrenome");
+        Date dataNasc = Date.valueOf(request.getParameter("dataNasc"));
+        String cpf = request.getParameter("cpf");
+        String email = request.getParameter("email");
+        String telefone = request.getParameter("telefone");
+        String login = request.getParameter("login");
 
-        produto = new Produto(id, nome, valor, quantidade, tipo, descricao);
+        funcionario = new Funcionario(id, nome, sobrenome, dataNasc, cpf, email, telefone, login);
 
-        dao.atualizarProduto(produto);
-        request.setAttribute("produto", "Produto: ''" + request.getParameter("nome") + "'' foi alterada com sucesso!!");
+        dao.atualizarFuncionario(funcionario);
+        request.setAttribute("funcionario", "Funcionario: ''" + nome + "'' foi alterado com sucesso!!");
 
 //                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/WEB-INF/jsp/estoque.jsp");
+                = request.getRequestDispatcher("/WEB-INF/jsp/funcionarios.jsp");
         dispatcher.forward(request, response);
 
     }

@@ -143,19 +143,22 @@
                 </form>
             </section>
 
-            <aside id="menuLateral">
+             <aside id="menuLateral">
                 <ul>
                     <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
                     <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> 
                     <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> 
                     <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTO</a></li>
                     <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> 
-                    <li><a href="/projetox/CadastrarFuncServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
+                    <li><a href="/projetox/FuncionarioServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
                     <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> 
-                    <li><a href="/projetox/CadastraFuncServlet01">CONSULTAR<br>CLIENTES</a></li> 
+                    <li><a href="/projetox/ClienteServlet01">CONSULTAR<br>CLIENTES</a></li> 
                     <li><a href="/projetox/RelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> 
                 </ul>
             </aside>
+
+
+
         </div>
     </body>
 

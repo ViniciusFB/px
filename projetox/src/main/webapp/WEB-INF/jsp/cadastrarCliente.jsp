@@ -40,7 +40,7 @@
             </header>
 
             <section id="corpo">
-                 <form class="form-horizontal" action="cadastrarCliente" method="post"  id="form_cadastro">
+                 <form class="form-horizontal" action="CadastrarCliServlet02" method="post"  id="form_cadastro">
 
                     <center>
                         <div class="register-block">
@@ -186,9 +186,9 @@
                                     <div class="col-md-4">
                                         <div class="radio">
                                             <label style="padding-left: 25px">
-                                                <input type="radio" name="genero" value="no" /> Masculino 
+                                                <input type="radio" name="genero" value="masculino" /> Masculino 
                                             </label><label style="padding-left: 25px">
-                                                <input type="radio" name="genero" value="yes" /> Feminino
+                                                <input type="radio" name="genero" value="feminino" /> Feminino
                                             </label>
                                         </div>
                                     </div>
@@ -210,23 +210,26 @@
                 </form>
             </section>
 
-            <aside id="menuLateral">
+             <aside id="menuLateral">
                 <ul>
                     <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
                     <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> 
                     <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> 
                     <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTO</a></li>
                     <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> 
-                    <li><a href="/projetox/CadastrarFuncServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
+                    <li><a href="/projetox/FuncionarioServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
                     <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> 
-                    <li><a href="/projetox/CadastraFuncServlet01">CONSULTAR<br>CLIENTES</a></li> 
+                    <li><a href="/projetox/ClienteServlet01">CONSULTAR<br>CLIENTES</a></li> 
                     <li><a href="/projetox/RelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> 
                 </ul>
             </aside>
-            
+
+
+
         </div>
     </body>
-     <footer class="footer">
+
+    <footer class="footer">
         <p class="text-center">Copyright &copy; 2017, ProjetoX</p>
     </footer>
 

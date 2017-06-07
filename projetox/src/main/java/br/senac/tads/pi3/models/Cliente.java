@@ -24,30 +24,26 @@ public class Cliente {
     private String estado;
     private String cidade;
     private String endereco;
-    private String cep;
-    private int numCasa;
     private String genero;
 
     public Cliente() {
-        
+
     }
 
-    public Cliente(String nome, String sobrenome, Date dataNasc, String cpf, String email, String telefone, String estado, String cidade, String endereco, String cep, int numCasa, String genero) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dataNasc = dataNasc;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.endereco = endereco;
-        this.cep = cep;
-        this.numCasa = numCasa;
-        this.genero = genero;
+    public Cliente(Cliente cliente) {
+        this.id = cliente.id;
+        this.nome = cliente.nome;
+        this.sobrenome = cliente.sobrenome;
+        this.dataNasc = cliente.dataNasc;
+        this.cpf = cliente.cpf;
+        this.email = cliente.email;
+        this.telefone = cliente.telefone;
+        this.estado = cliente.estado;
+        this.cidade = cliente.cidade;
+        this.endereco = cliente.endereco;
     }
 
-    public Cliente(int id, String nome, String sobrenome, Date dataNasc, String cpf, String email, String telefone, String estado, String cidade, String endereco, String cep, int numCasa, String genero) {
+    public Cliente(int id, String nome, String sobrenome, Date dataNasc, String cpf, String email, String telefone, String estado, String cidade, String endereco) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -58,12 +54,34 @@ public class Cliente {
         this.estado = estado;
         this.cidade = cidade;
         this.endereco = endereco;
-        this.cep = cep;
-        this.numCasa = numCasa;
+    }
+
+    public Cliente(String nome, String sobrenome, Date dataNasc, String cpf, String email, String telefone, String estado, String cidade, String endereco, String genero) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.dataNasc = dataNasc;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.endereco = endereco;
         this.genero = genero;
     }
 
-    
+    public Cliente(int id, String nome, String sobrenome, Date dataNasc, String cpf, String email, String telefone, String estado, String cidade, String endereco, String genero) {
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.dataNasc = dataNasc;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.endereco = endereco;
+        this.genero = genero;
+    }
 
     public int getId() {
         return id;
@@ -143,22 +161,6 @@ public class Cliente {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public int getNumCasa() {
-        return numCasa;
-    }
-
-    public void setNumCasa(int numCasa) {
-        this.numCasa = numCasa;
     }
 
     public String getGenero() {

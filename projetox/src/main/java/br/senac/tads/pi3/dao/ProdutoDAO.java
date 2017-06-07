@@ -179,19 +179,66 @@ public class ProdutoDAO extends ConexaoBD {
         }
         return lista;
     }
+    public List<Produto> pesquisarProdutoNomeFilial(String nome, int idFilial) throws SQLException, ClassNotFoundException {
+
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        String sql = "SELECT idProduto, nomeProduto, tipoProduto, quantidade, valorProduto "
+                + "FROM Produto WHERE disponivel = 'true' AND UPPER(nomeProduto) LIKE UPPER(?) AND idFilial = ? ";
+
+        List<Produto> lista = new ArrayList<>();
+        try {
+            conn = obterConexao();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + nome + "%");
+            stmt.setInt(2, idFilial);
+
+            ResultSet resultados = stmt.executeQuery();
+
+            while (resultados.next()) {
+
+                int id = resultados.getInt("idProduto");
+                String nomeP = resultados.getString("nomeProduto");
+                String tipo = resultados.getString("tipoProduto");
+                int quantidade = resultados.getInt("quantidade");
+                double valor = resultados.getDouble("valorProduto");
+
+                lista.add(new Produto(id, nomeP, tipo, quantidade, valor));
+            }
+        } catch (SQLException | NumberFormatException e) {
+            System.out.println(e);
+        } finally {
+
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return lista;
+    }
 
     public List<Produto> pesquisarProdutoFilial(int filial) throws SQLException, ClassNotFoundException {
 
         PreparedStatement stmt = null;
         Connection conn = null;
         String sql = "SELECT idProduto, nomeProduto, tipoProduto, quantidade, valorProduto "
-                + "FROM Produto WHERE disponivel = 'true' AND idFilial LIKE (?) ";
+                + "FROM Produto WHERE disponivel = 'true' AND idFilial = ? ";
 
         List<Produto> lista = new ArrayList<>();
         try {
             conn = obterConexao();
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, "%" + filial + "%");
+            stmt.setInt(1, filial);
 
             ResultSet resultados = stmt.executeQuery();
 
@@ -232,8 +279,8 @@ public class ProdutoDAO extends ConexaoBD {
         Connection conn = null;
 
         String sql = "INSERT INTO Produto "
-                + "(nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, cadastradoPor, dataCadastro, disponivel) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, cadastradoPor, dataCadastro, disponivel, idFilial) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             conn = obterConexao();
@@ -249,7 +296,9 @@ public class ProdutoDAO extends ConexaoBD {
             stmt.setString(7, produto.getFuncio());
             stmt.setTimestamp(8, new java.sql.Timestamp(System.currentTimeMillis()));
             stmt.setBoolean(9, true);
+            stmt.setInt(10, produto.getIdFilial());
 
+            
             stmt.executeUpdate();
 
             // ResultSet para recuperar o ID gerado automaticamente no banco de dados.
@@ -306,7 +355,7 @@ public class ProdutoDAO extends ConexaoBD {
         Connection conn = null;
 
         String sql = "INSERT INTO Produto "
-                + "(nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, cadastradoPor, dataCadastro, disponivel) "
+                + "(nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, cadastradoPor, dataCadastro, disponivel, idFilial) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             conn = obterConexao();
@@ -320,8 +369,7 @@ public class ProdutoDAO extends ConexaoBD {
             stmt.setString(7, produto.getFuncio());
             stmt.setTimestamp(8, new java.sql.Timestamp(System.currentTimeMillis()));
             stmt.setString(9, produto.getFuncio());
-            stmt.setTimestamp(10, new java.sql.Timestamp(System.currentTimeMillis()));
-            stmt.setBoolean(11, true);
+            stmt.setInt(10, produto.getIdFilial());
 
             stmt.executeUpdate();
             //System.out.println("Registro incluido com sucesso.");

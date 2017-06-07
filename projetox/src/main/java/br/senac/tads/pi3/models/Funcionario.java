@@ -72,9 +72,30 @@ public class Funcionario {
         this.cargo = cargo;
         this.login = login;
     }
+    
+    public Funcionario(Funcionario funcionario) {
+        this.id = funcionario.id;
+        this.nome = funcionario.nome;
+        this.sobrenome = funcionario.sobrenome;
+        this.dataNasc = funcionario.dataNasc;
+        this.cpf = funcionario.cpf;
+        this.email = funcionario.email;
+        this.telefone = funcionario.telefone;
+        this.estado = funcionario.estado;
+        this.cidade = funcionario.cidade;
+        this.cargo = funcionario.cargo;
+        this.login = funcionario.login;
+    }
 
-    Funcionario(Funcionario funcionario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Funcionario(int id, String nome, String sobrenome, Date dataNasc, String cpf, String email, String telefone, String login) {
+       this.id = id;
+       this.nome = nome;
+       this.sobrenome = sobrenome;
+       this.dataNasc = dataNasc;
+       this.cpf = cpf;
+       this.email = email;
+       this.telefone = telefone;
+       this.login = login;
     }
 
     public int getId() {

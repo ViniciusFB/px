@@ -20,7 +20,7 @@ create table Produto(
     cadastradoPor VARCHAR(50) NOT NULL,
     dataCadastro TIMESTAMP NOT NULL,
     disponivel BOOLEAN NOT NULL,
-    idFilial INT NOT NULL UNIQUE,
+    idFilial INT NOT NULL,
     FOREIGN KEY (idFilial) REFERENCES Filial (idFilial)
   
 );
@@ -37,8 +37,6 @@ create table Cliente (
     estadoCliente VARCHAR(50),
     cidadeCliente VARCHAR(50),
     enderecoCliente VARCHAR(50),
-    cepCliente VARCHAR(50),
-    numCasa INT NOT NULL,
     generoCliente VARCHAR(50)
 );
 
@@ -64,9 +62,9 @@ CREATE TABLE Filial (
  CONSTRAINT PK_Filial PRIMARY KEY,
     nomeFilial VARCHAR(50) NOT NULL,
     estadoFilial VARCHAR(50) NOT NULL,
-    cidadeFilial VARCHAR(50) NOT NULL,
-    idProduto INT NOT NULL,
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+    cidadeFilial VARCHAR(50) NOT NULL
+--   , idProduto INT NOT NULL
+--   ,  FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
 );
 
  create table Venda (
@@ -142,3 +140,6 @@ create table ProdutosExcluidos(
 
 
 UPDATE Filial SET nomeFilial = 'Filial 3' WHERE idFilial = 3;
+INSERT INTO FILIAL (nomeFilial, estadoFilial, cidadeFilial) VALUES ('Filial 1', 'SP', 'SP');
+INSERT INTO FILIAL (nomeFilial, estadoFilial, cidadeFilial) VALUES ('Filial 2', 'RJ', 'IPA');
+INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel, idFilial) VALUES ('Pro2dut66', 29891, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true, 2);

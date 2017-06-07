@@ -28,8 +28,8 @@ public class ClienteDAO extends ConexaoBD {
         Connection conn = null;
         Cliente c = null;
 
-        String sql = "SELECT idCliente, nomeCliente, sobrenomeCliente, dataNasc, cpfCliente, emailCliente, telefoneCliente, estadoCliente, cidadeCliente, enderecoCliente,"
-                + "cepCliente, numCasa, generoCliente "
+        String sql = "SELECT idCliente, nomeCliente, sobrenomeCliente, dataNasc, cpfCliente, emailCliente, telefoneCliente, estadoCliente, cidadeCliente, enderecoCliente, "
+                + "generoCliente "
                 + "FROM Cliente WHERE idCliente = ?";
 
         try {
@@ -49,10 +49,8 @@ public class ClienteDAO extends ConexaoBD {
                 String estado = resultados.getString("estadoCliente");
                 String cidade = resultados.getString("cidadeCliente");
                 String endereco = resultados.getString("enderecoCliente");
-                String cep = resultados.getString("cepCliente");
-                int numCasa = resultados.getInt("numCasa");
                 String genero = resultados.getString("generoCliente");
-                c = new Cliente(id, nome, sobrenome, dataNasc, cpf, email, telefone, estado, cidade, endereco, cep, numCasa, genero);
+                c = new Cliente(id, nome, sobrenome, dataNasc, cpf, email, telefone, estado, cidade, endereco, genero);
                 break;
             }
         } catch (SQLException ex) {
@@ -86,9 +84,8 @@ public class ClienteDAO extends ConexaoBD {
         Statement stmt = null;
         Connection conn = null;
 
-        String sql = "SELECT idCliente, nomeCliente, sobrenomeCliente, dataNasc, cpfCliente, emailCliente, telefoneCliente, estadoCliente, cidadeCliente, enderecoCliente,"
-                + "cepCliente, numCasa, generoCliente "
-                + "FROM Cliente";
+        String sql = "SELECT idCliente, nomeCliente, sobrenomeCliente, dataNasc, cpfCliente, emailCliente, telefoneCliente, estadoCliente, cidadeCliente, enderecoCliente, "
+                + "generoCliente FROM Cliente ";
 
         List<Cliente> lista = new ArrayList<>();
         try {
@@ -108,11 +105,9 @@ public class ClienteDAO extends ConexaoBD {
                 String estado = resultados.getString("estadoCliente");
                 String cidade = resultados.getString("cidadeCliente");
                 String endereco = resultados.getString("enderecoCliente");
-                String cep = resultados.getString("cepCliente");
-                int numCasa = resultados.getInt("numCasa");
                 String genero = resultados.getString("generoCliente");
                 Cliente cliente = new Cliente(id, nome, sobrenome, dataNasc, cpf, email, telefone, estado, cidade,
-                        endereco, cep, numCasa, genero);
+                        endereco, genero);
 
                 lista.add(cliente);
             }
@@ -148,9 +143,9 @@ public class ClienteDAO extends ConexaoBD {
         Connection conn = null;
 
         String sql = "INSERT INTO Cliente "
-                + "(nomeCliente, sobrenomeCliente, dataNasc, cpfCliente, emailCliente, telefoneCliente, estadoCliente, cidadeCliente, enderecoCliente,"
-                + "cepCliente, numCasa, generoCliente) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(nomeCliente, sobrenomeCliente, dataNasc, cpfCliente, emailCliente, telefoneCliente, estadoCliente, cidadeCliente, enderecoCliente, "
+                + "generoCliente) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             conn = obterConexao();
 
@@ -165,9 +160,7 @@ public class ClienteDAO extends ConexaoBD {
             stmt.setString(7, cliente.getEstado());
             stmt.setString(8, cliente.getCidade());
             stmt.setString(9, cliente.getEndereco());
-            stmt.setString(10, cliente.getCep());
-            stmt.setInt(11, cliente.getNumCasa());
-            stmt.setString(12, cliente.getGenero());
+            stmt.setString(10, cliente.getGenero());
 
             stmt.executeUpdate();
 
@@ -225,9 +218,9 @@ public class ClienteDAO extends ConexaoBD {
         Connection conn = null;
 
         String sql = "INSERT INTO Cliente "
-                + "(nomeCliente, sobrenomeCliente, dataNasc, cpfCliente, emailCliente, telefoneCliente, estadoCliente, cidadeCliente, enderecoCliente,"
-                + "cepCliente, numCasa, generoCliente) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(nomeCliente, sobrenomeCliente, dataNasc, cpfCliente, emailCliente, telefoneCliente, estadoCliente, cidadeCliente, enderecoCliente, "
+                + "generoCliente) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             conn = obterConexao();
             stmt = conn.prepareStatement(sql);
@@ -240,9 +233,7 @@ public class ClienteDAO extends ConexaoBD {
             stmt.setString(7, cliente.getEstado());
             stmt.setString(8, cliente.getCidade());
             stmt.setString(9, cliente.getEndereco());
-            stmt.setString(10, cliente.getCep());
-            stmt.setInt(11, cliente.getNumCasa());
-            stmt.setString(12, cliente.getGenero());
+            stmt.setString(10, cliente.getGenero());
             stmt.executeUpdate();
             //System.out.println("Registro incluido com sucesso.");
 
@@ -266,6 +257,92 @@ public class ClienteDAO extends ConexaoBD {
                 }
             }
         }
+    }
+
+    public void atualizarCliente(Cliente cliente) {
+
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        String sql = "UPDATE Cliente SET nomeCliente=?, sobrenomeCliente=?, dataNasc=?, cpfCliente=?, emailCliente=?, "
+                + "telefoneCliente=?, estadoCliente=?, cidadeCliente=?, enderecoCliente=? WHERE (idCliente=?)";
+
+        try {
+            conn = obterConexao();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getSobrenome());
+            stmt.setDate(3, cliente.getDataNasc());
+            stmt.setString(4, cliente.getCpf());
+            stmt.setString(5, cliente.getEmail());
+            stmt.setString(6, cliente.getTelefone());
+            stmt.setString(7, cliente.getEstado());
+            stmt.setString(8, cliente.getCidade());
+            stmt.setString(9, cliente.getEndereco());
+            stmt.setInt(10, cliente.getId());
+
+            stmt.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public void excluirCliente(int id) {
+
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        String sql = "DELETE FROM Cliente WHERE (idCliente=?)";
+
+        try {
+
+            conn = obterConexao();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            stmt.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
     }
 
 }

@@ -5,11 +5,12 @@
  */
 package br.senac.tads.pi3.projetox;
 
-import br.senac.tads.pi3.dao.ProdutoDAO;
-import br.senac.tads.pi3.models.Produto;
+import br.senac.tads.pi3.dao.ClienteDAO;
+import br.senac.tads.pi3.models.Cliente;
 import java.io.IOException;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +20,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author vinicius.fbatista1
+ * @author Vinicius Ferreira Batista
  */
-@WebServlet(name = "AlterarProdutoServlet02", urlPatterns = {"/AlterarProdutoServlet02"})
-public class AlterarProdutoServlet02 extends HttpServlet {
+@WebServlet(name = "ExcluirCliServlet", urlPatterns = {"/ExcluirCliServlet"})
+public class ExcluirCliServlet extends HttpServlet {
 
     /**
      * Neste exemplo, somente apresenta a tela do formulário
@@ -32,12 +33,31 @@ public class AlterarProdutoServlet02 extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        RequestDispatcher dispatcher
-//                = request.getRequestDispatcher("alterarProd.jsp");
-//        dispatcher.forward(request, response);
+        ClienteDAO dao = new ClienteDAO();
+        Cliente cliente = null;
+        int id = Integer.parseInt(request.getParameter("idCliente"));
+
+        cliente = new Cliente((Cliente) dao.obterCliente(Integer.parseInt(request.getParameter("idCliente"))));
+
+        String nome = cliente.getNome();
+
+        dao.excluirCliente((id));
+        request.setAttribute("cliente", "Cliente: ''" + nome + "'' foi removido com sucesso!!");
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/clientes.jsp").forward(request, response);
+      
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ExcluirCliServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -51,29 +71,9 @@ public class AlterarProdutoServlet02 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        boolean erro = false;
-        Produto produto = null;
-        ProdutoDAO dao = new ProdutoDAO();
         HttpSession sessao = request.getSession();
-
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String tipo = request.getParameter("tipo");
-        int quantidade = Integer.parseInt(request.getParameter("quantidade"));
-        String descricao = request.getParameter("descricao");
-        double valor = Double.parseDouble(request.getParameter("valor"));
-
-        produto = new Produto(id, nome, valor, quantidade, tipo, descricao);
-
-        dao.atualizarProduto(produto);
-        request.setAttribute("produto", "Produto: ''" + request.getParameter("nome") + "'' foi alterada com sucesso!!");
-
-//                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/WEB-INF/jsp/estoque.jsp");
-        dispatcher.forward(request, response);
-
     }
+
 }

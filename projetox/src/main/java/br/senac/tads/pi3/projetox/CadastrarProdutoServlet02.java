@@ -66,7 +66,7 @@ public class CadastrarProdutoServlet02 extends HttpServlet {
         nome = nome.trim();
         if (nome == null || nome.length() < 3 || nome.equals("")) {
             erro = true;
-            request.setAttribute("erroNome", true);
+            request.setAttribute("produto", "Não foi possível cadastrar o produto!");
         }
 
         int codigo = Integer.parseInt(request.getParameter("codigo"));

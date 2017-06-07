@@ -238,4 +238,13 @@ public class Produto {
         this.dataExclusao = dataExclusao;
     }
 
+    public int getIdFilial() {
+        return idFilial;
+    }
+
+    public void setIdFilial(int idFilial) {
+        this.idFilial = idFilial;
+    }
+    
+
 }

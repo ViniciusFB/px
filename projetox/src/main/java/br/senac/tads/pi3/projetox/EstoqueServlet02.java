@@ -68,27 +68,29 @@ public class EstoqueServlet02 extends HttpServlet {
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
         try {
             String nome = request.getParameter("nomeProduto");
-            int filial = Integer.parseInt(request.getParameter("filial"));
-            produtos = dao.pesquisarProduto(nome);
-            
-            f = new Filial((Filial) daoF.obterFilial(filial));
-          
-            String nomeF = f.getNome();
-            
-            
-            //O nome obtido pelo name sera transformado em maiusculo e servira de parametro para o metodo que ira pesquisar
-            //este produto. Logo em seguida ele sera setado numa variavel que sera resgatada pela JSP.
+//            int filial = Integer.parseInt(request.getParameter("filial"));
+            String campoFilial = request.getParameter("filial");
 
-            request.setAttribute("pesquisa", produtos);
+            f = new Filial((Filial) daoF.obterFilialPorNome(campoFilial));
 
-            if (nome == null || nome.equals("")) {
+            int idFilial = f.getId();
+
+            if (nome != null && campoFilial == null || campoFilial.equals("")) {
+                produtos = dao.pesquisarProduto(nome);
+                request.setAttribute("pesquisa", produtos);
+            } else if (nome != null && !campoFilial.equals("")) {
+                produtos = dao.pesquisarProdutoNomeFilial(nome, idFilial); 
+                request.setAttribute("pesquisa", produtos);
+            }
+
+            if (nome == null || nome.equals("") && campoFilial == null || campoFilial.equals("")) {
                 produtos = dao.listar();
                 request.setAttribute("pesquisa", produtos);
 
+            } else if (nome.equals("") && !campoFilial.equals("")) {
+                produtos = dao.pesquisarProdutoFilial(idFilial);
+                request.setAttribute("pesquisa", produtos);
             }
-                filiais = dao.listar();
-                request.setAttribute("pesquisa", filiais);
-           
 
             //Enviando os valores setados no servlet para a JSP determinada no parametro
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);

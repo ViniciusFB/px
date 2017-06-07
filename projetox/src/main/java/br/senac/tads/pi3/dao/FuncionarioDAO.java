@@ -28,7 +28,7 @@ public class FuncionarioDAO extends ConexaoBD {
         Connection conn = null;
         Funcionario f = null;
 
-        String sql = "SELECT idFuncionario, nomeFuncionario, sobrenomeFuncionario, dataNasc,"
+        String sql = "SELECT idFuncionario, nomeFuncionario, sobrenomeFuncionario, dataNasc, "
                 + " cpfFuncionario, emailFuncionario, telefoneFuncionario, estadoFuncionario, cidadeFuncionario, cargo, login, senha "
                 + "FROM Funcionario WHERE idFuncionario = ?";
 
@@ -258,6 +258,89 @@ public class FuncionarioDAO extends ConexaoBD {
                     conn.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public void excluirFuncionario(int id) {
+
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        String sql = "DELETE FROM Funcionario WHERE (idFuncionario=?)";
+
+        try {
+
+            conn = obterConexao();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            stmt.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }
+    public void atualizarFuncionario(Funcionario funcionario) {
+
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        String sql = "UPDATE Funcionario SET nomeFuncionario=?, sobrenomeFuncionario=?, dataNasc=?, cpfFuncionario=?, emailFuncionario=?, "
+                + "telefoneFuncionario=?, login=? WHERE (idFuncionario=?)";
+
+        try {
+            conn = obterConexao();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, funcionario.getNome());
+            stmt.setString(2, funcionario.getSobrenome());
+            stmt.setDate(3, funcionario.getDataNasc());
+            stmt.setString(4, funcionario.getCpf());
+            stmt.setString(5, funcionario.getEmail());
+            stmt.setString(6, funcionario.getTelefone());
+            stmt.setString(7, funcionario.getLogin());
+            stmt.setInt(8, funcionario.getId());
+
+            stmt.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
