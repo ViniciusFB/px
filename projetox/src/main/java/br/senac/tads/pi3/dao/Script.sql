@@ -19,11 +19,9 @@ create table Produto(
     valorProduto DOUBLE NOT NULL,
     cadastradoPor VARCHAR(50) NOT NULL,
     dataCadastro TIMESTAMP NOT NULL,
-    disponivel BOOLEAN NOT NULL
---     , nomeFilial VARCHAR(50) NOT NULL
---     , idFilial (INT NOT NULL) UNIQUE
---     , FOREIGN KEY (nomeFilial) REFERENCES Filial (nomeFilial)
---     , FOREIGN KEY (idFilial) REFERENCES Filial (idFilial)
+    disponivel BOOLEAN NOT NULL,
+    idFilial INT NOT NULL UNIQUE,
+    FOREIGN KEY (idFilial) REFERENCES Filial (idFilial)
   
 );
 
@@ -59,6 +57,16 @@ create table Funcionario (
   login VARCHAR(20) NOT NULL,
   senha VARCHAR(20) NOT NULL
 
+);
+
+CREATE TABLE Filial (
+    idFilial INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
+ CONSTRAINT PK_Filial PRIMARY KEY,
+    nomeFilial VARCHAR(50) NOT NULL,
+    estadoFilial VARCHAR(50) NOT NULL,
+    cidadeFilial VARCHAR(50) NOT NULL,
+    idProduto INT NOT NULL,
+    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
 );
 
  create table Venda (
@@ -111,7 +119,7 @@ create table ProdutosExcluidos(
 --    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
 -- );
 
-
+-- 
 -- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto01', 369, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
 -- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto542', 318, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
 -- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Produto233', 181, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
@@ -130,3 +138,7 @@ create table ProdutosExcluidos(
 -- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Pro2duto74', 98421, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
 -- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Prod2ut75', 92931, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
 -- INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel) VALUES ('Pro2dut66', 29891, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true);
+
+
+
+UPDATE Filial SET nomeFilial = 'Filial 3' WHERE idFilial = 3;

@@ -49,10 +49,9 @@
                                 <label class="input-group-addon" for="filial">Filial: </label>
                                 <select name="filial" class="form-control selectpicker">
                                     <option value="" disabled selected>Selecione uma filial...</option>
-                                    <option>OPÇÃO1</option>
-                                    <option>OPÇÃO2</option>
-                                    <option >OPÇÃO3</option>
-                                    <option >OPÇÃO4</option>
+                                    <c:forEach items="${listaFilial}" var="filial">
+                                        <option value="${filial.nome}">${filial.nome}</option>
+                                    </c:forEach>
 
                                 </select>
                             </div>

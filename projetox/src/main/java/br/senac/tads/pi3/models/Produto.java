@@ -20,6 +20,7 @@ public class Produto {
     private double valor;
     private String descricao;
     private String tipo;
+    private int idFilial;
 
     // Para gerar relatórios de cadastrado
     private String funcio;
@@ -84,6 +85,19 @@ public class Produto {
         this.valor = valor;
         this.funcio = funcio;
         this.dataCadastro = dataCadastro;
+
+    }
+    public Produto(String nome, int codigo, String tipo, int quantidade, String descricao, double valor, String funcio, Date dataCadastro, int idFilial) {
+
+        this.nome = nome;
+        this.codigo = codigo;
+        this.tipo = tipo;
+        this.quantidade = quantidade;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.funcio = funcio;
+        this.dataCadastro = dataCadastro;
+        this.idFilial = idFilial;
 
     }
 

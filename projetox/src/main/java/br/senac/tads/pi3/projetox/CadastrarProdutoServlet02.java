@@ -5,10 +5,15 @@
  */
 package br.senac.tads.pi3.projetox;
 
+import br.senac.tads.pi3.dao.FilialDAO;
 import br.senac.tads.pi3.dao.ProdutoDAO;
+import br.senac.tads.pi3.models.Filial;
 import br.senac.tads.pi3.models.Produto;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,9 +59,12 @@ public class CadastrarProdutoServlet02 extends HttpServlet {
         boolean erro = false;
         HttpSession sessao = request.getSession();
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
+        FilialDAO df = new FilialDAO();
+        Filial f = null;
 
         String nome = request.getParameter("nome");
-        if (nome == null || nome.length() < 1 || nome.equals("")) {
+        nome = nome.trim();
+        if (nome == null || nome.length() < 3 || nome.equals("")) {
             erro = true;
             request.setAttribute("erroNome", true);
         }
@@ -72,11 +80,21 @@ public class CadastrarProdutoServlet02 extends HttpServlet {
         String descricao = request.getParameter("descricao");
         double valor = Double.parseDouble(request.getParameter("valor"));
         String funcionario = request.getParameter("funcio");
+        String filial = request.getParameter("filial");
+        
+        try {
+            f = new Filial((Filial) df.obterFilialPorNome(filial));
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarProdutoServlet02.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            int id = f.getId();
+            
 
         if (!erro) {
             // Os dados foram preenchidos corretamente
             // Faz o fluxo POST-REDIRECT-GET para a tela de resultados
-            Produto novo = new Produto(nome, codigo, tipo, quantidade, descricao, valor, funcionario, new Date());
+            Produto novo = new Produto(nome, codigo, tipo, quantidade, descricao, valor, funcionario, new Date(), id);
 
             ProdutoDAO dao = new ProdutoDAO();
             dao.incluirComTransacao(novo);

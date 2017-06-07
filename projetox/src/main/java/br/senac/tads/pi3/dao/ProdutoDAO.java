@@ -81,8 +81,6 @@ public class ProdutoDAO extends ConexaoBD {
         Statement stmt = null;
         Connection conn = null;
 
-//        String sql = "SELECT idProduto, nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, cadastradoPor, dataCadastro "
-//                + "FROM Produto";
         String sql = "SELECT idProduto, nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, cadastradoPor, "
                 + " dataCadastro FROM Produto WHERE disponivel = 'true' ";
 
@@ -92,7 +90,6 @@ public class ProdutoDAO extends ConexaoBD {
             conn = obterConexao();
             stmt = conn.createStatement();
             ResultSet resultados = stmt.executeQuery(sql);
-            DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
 
             while (resultados.next()) {
                 int id = resultados.getInt("idProduto");
@@ -148,6 +145,53 @@ public class ProdutoDAO extends ConexaoBD {
             conn = obterConexao();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, "%" + nome + "%");
+
+            ResultSet resultados = stmt.executeQuery();
+
+            while (resultados.next()) {
+
+                int id = resultados.getInt("idProduto");
+                String nomeP = resultados.getString("nomeProduto");
+                String tipo = resultados.getString("tipoProduto");
+                int quantidade = resultados.getInt("quantidade");
+                double valor = resultados.getDouble("valorProduto");
+
+                lista.add(new Produto(id, nomeP, tipo, quantidade, valor));
+            }
+        } catch (SQLException | NumberFormatException e) {
+            System.out.println(e);
+        } finally {
+
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return lista;
+    }
+
+    public List<Produto> pesquisarProdutoFilial(int filial) throws SQLException, ClassNotFoundException {
+
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        String sql = "SELECT idProduto, nomeProduto, tipoProduto, quantidade, valorProduto "
+                + "FROM Produto WHERE disponivel = 'true' AND idFilial LIKE (?) ";
+
+        List<Produto> lista = new ArrayList<>();
+        try {
+            conn = obterConexao();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + filial + "%");
 
             ResultSet resultados = stmt.executeQuery();
 
@@ -393,8 +437,8 @@ public class ProdutoDAO extends ConexaoBD {
         Connection conn = null;
 
         String sql = "INSERT INTO ProdutosExcluidos "
-                + "(idProduto, nomeProduto, quantidade, valorProduto, excluidoPor, dataExclusao) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+                + "(idProduto, nomeProduto, quantidade, valorProduto, excluidoPor, dataExclusao, idFilial) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             conn = obterConexao();
@@ -407,6 +451,7 @@ public class ProdutoDAO extends ConexaoBD {
             stmt.setDouble(4, produto.getValor());
             stmt.setString(5, produto.getFuncio());
             stmt.setTimestamp(6, new java.sql.Timestamp(System.currentTimeMillis()));
+            stmt.setInt(7, produto.getId());
 
             stmt.execute();
 

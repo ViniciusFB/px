@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html class="no-js" lang="">
@@ -93,6 +94,21 @@
                                                 <option value="Relogio">Relógio</option>
                                                 <option value="Oculos">Óculos</option>
                                                 <option value="Bone">Boné</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group"> 
+                                    <label class="col-md-4 control-label">Filial</label>
+                                    <div class="col-md-4 selectContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                            <select required name="filial" class="form-control selectpicker">
+                                                <option value="" disabled selected>Selecione a filial..</option>
+                                                <c:forEach items="${listaFilial}" var="filial">
+                                                    <option value="${filial.nome}">${filial.nome}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>

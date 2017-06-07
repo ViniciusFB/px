@@ -5,7 +5,9 @@
  */
 package br.senac.tads.pi3.projetox;
 
+import br.senac.tads.pi3.dao.FilialDAO;
 import br.senac.tads.pi3.dao.ProdutoDAO;
+import br.senac.tads.pi3.models.Filial;
 import br.senac.tads.pi3.models.Produto;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -57,23 +59,36 @@ public class EstoqueServlet02 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProdutoDAO dao = new ProdutoDAO();
+        FilialDAO daoF = new FilialDAO();
 
         List<Produto> produtos;
+        List<Produto> filiais;
+        Filial f = null;
         HttpSession sessao = request.getSession();
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
         try {
             String nome = request.getParameter("nomeProduto");
+            int filial = Integer.parseInt(request.getParameter("filial"));
             produtos = dao.pesquisarProduto(nome);
+            
+            f = new Filial((Filial) daoF.obterFilial(filial));
+          
+            String nomeF = f.getNome();
+            
+            
             //O nome obtido pelo name sera transformado em maiusculo e servira de parametro para o metodo que ira pesquisar
             //este produto. Logo em seguida ele sera setado numa variavel que sera resgatada pela JSP.
-           
-                request.setAttribute("pesquisa", produtos);
+
+            request.setAttribute("pesquisa", produtos);
 
             if (nome == null || nome.equals("")) {
                 produtos = dao.listar();
                 request.setAttribute("pesquisa", produtos);
 
             }
+                filiais = dao.listar();
+                request.setAttribute("pesquisa", filiais);
+           
 
             //Enviando os valores setados no servlet para a JSP determinada no parametro
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);
