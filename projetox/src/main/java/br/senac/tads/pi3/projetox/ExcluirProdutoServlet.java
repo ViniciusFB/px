@@ -5,6 +5,7 @@
  */
 package br.senac.tads.pi3.projetox;
 
+import br.senac.tads.pi3.dao.FilialDAO;
 import br.senac.tads.pi3.dao.ProdutoDAO;
 import br.senac.tads.pi3.models.Produto;
 import java.io.IOException;
@@ -67,6 +68,10 @@ public class ExcluirProdutoServlet extends HttpServlet {
         dao.adicionarExclusao(produto);
 
         dao.excluirProduto((id));
+        
+        FilialDAO daoF = new FilialDAO();
+
+        request.setAttribute("listaFilial", daoF.listar());
         request.setAttribute("produto", "Produto: ''" + nome + "'' foi removido com sucesso!!");
         this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);
         try {

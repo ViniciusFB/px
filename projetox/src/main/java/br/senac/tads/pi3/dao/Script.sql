@@ -61,8 +61,7 @@ CREATE TABLE Filial (
     idFilial INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
  CONSTRAINT PK_Filial PRIMARY KEY,
     nomeFilial VARCHAR(50) NOT NULL,
-    estadoFilial VARCHAR(50) NOT NULL,
-    cidadeFilial VARCHAR(50) NOT NULL
+    estadoFilial VARCHAR(50) NOT NULL
 --   , idProduto INT NOT NULL
 --   ,  FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
 );
@@ -107,6 +106,7 @@ create table ProdutosExcluidos(
 );
 
 
-INSERT INTO FILIAL (nomeFilial, estadoFilial, cidadeFilial) VALUES ('Filial 1', 'SP', 'SP');
-INSERT INTO FILIAL (nomeFilial, estadoFilial, cidadeFilial) VALUES ('Filial 2', 'RJ', 'IPA');
+INSERT INTO FILIAL (nomeFilial, estadoFilial) VALUES ('MATRIZ SP', 'SP');
+INSERT INTO FILIAL (nomeFilial, estadoFilial) VALUES ('FILIAL RECIFE', 'PE');
+INSERT INTO FILIAL (nomeFilial, estadoFilial) VALUES ('FILIAL PORTO ALEGRE', 'RS');
 INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel, idFilial) VALUES ('Pro2dut66', 29891, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true, 2);

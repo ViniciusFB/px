@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastrar Funcionário</title>
+        <title>Cadastrar Cliente</title>
        <link rel="stylesheet" type="text/css" href="css/Funcionario.css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         
@@ -214,7 +214,7 @@
                 <ul>
                     <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
                     <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> 
-                    <li><a href="/projetox/VendProdServlet01">VENDER<br>PRODUTOS</a></li> 
+                    <li><a href="/projetox/VendaServlet01">VENDER<br>PRODUTOS</a></li> 
                     <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTO</a></li>
                     <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> 
                     <li><a href="/projetox/FuncionarioServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 

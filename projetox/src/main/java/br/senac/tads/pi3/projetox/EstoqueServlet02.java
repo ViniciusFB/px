@@ -66,24 +66,27 @@ public class EstoqueServlet02 extends HttpServlet {
         Filial f = null;
         HttpSession sessao = request.getSession();
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
+       int idFilial = -0;
         try {
             String nome = request.getParameter("nomeProduto");
 //            int filial = Integer.parseInt(request.getParameter("filial"));
             String campoFilial = request.getParameter("filial");
 
-            f = new Filial((Filial) daoF.obterFilialPorNome(campoFilial));
+            if (campoFilial != null) {
+                f = new Filial((Filial) daoF.obterFilialPorNome(campoFilial));
+                idFilial = f.getId();
 
-            int idFilial = f.getId();
+            }
 
             if (nome != null && campoFilial == null || campoFilial.equals("")) {
                 produtos = dao.pesquisarProduto(nome);
                 request.setAttribute("pesquisa", produtos);
             } else if (nome != null && !campoFilial.equals("")) {
-                produtos = dao.pesquisarProdutoNomeFilial(nome, idFilial); 
+                produtos = dao.pesquisarProdutoNomeFilial(nome, idFilial);
                 request.setAttribute("pesquisa", produtos);
             }
 
-            if (nome == null || nome.equals("") && campoFilial == null || campoFilial.equals("")) {
+            if (nome == null || nome.equals("") && campoFilial == null) {
                 produtos = dao.listar();
                 request.setAttribute("pesquisa", produtos);
 
@@ -92,6 +95,9 @@ public class EstoqueServlet02 extends HttpServlet {
                 request.setAttribute("pesquisa", produtos);
             }
 
+            
+            request.setAttribute("listaFilial", daoF.listar());
+            
             //Enviando os valores setados no servlet para a JSP determinada no parametro
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);
 

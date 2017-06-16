@@ -4,10 +4,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 30/04/2016, 15:04:02
-    Author     : AX4B
+    Created on : 16/06/2017, 00:21:45
+    Author     : Vinicius Ferreira Batista
 */
-
 
 body {
     background-image: url(../imagens/imagemxx.jpg);
@@ -161,14 +160,38 @@ ul li a:hover{
   background-color: #77726f;
 }
 #tabela{
-    width: 700px;
+    width: 750px;
     margin: auto;
     position: absolute;
-    top: 500px;
-    height: 400px;
+    top: 520px;
+    height: 150px;
     overflow-y: auto;
     overflow-x: hidden;
 }
 #tabela table {
   width: 690px;
+}
+#dadosProd {
+    margin: auto;
+    position: absolute;
+    top: 68%;
+}
+
+#carrinho{
+    width: 750px;
+    margin: auto;
+    position: absolute;
+    top: 77%;
+    height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#carrinho table {
+  width: 690px;
+}
+
+#dadosVenda {
+    margin: auto;
+    position: absolute;
+    top: 95%;
 }

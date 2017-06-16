@@ -27,7 +27,7 @@ public class FilialDAO extends ConexaoBD {
         Connection conn = null;
         Filial f = null;
 
-        String sql = "SELECT idFilial, nomeFilial, estadoFilial, cidadeFilial "
+        String sql = "SELECT idFilial, nomeFilial, estadoFilial "
                 + "FROM Filial WHERE idFilial = ?";
 
         try {
@@ -40,8 +40,7 @@ public class FilialDAO extends ConexaoBD {
                 int id = resultados.getInt("idFilial");
                 String nome = resultados.getString("nomeFilial");
                 String estado = resultados.getString("estadoFilial");
-                String cidade = resultados.getString("cidadeFilial");
-                f = new Filial(id, nome, estado, cidade);
+                f = new Filial(id, nome, estado);
                 break;
             }
         } catch (SQLException ex) {
@@ -75,7 +74,7 @@ public class FilialDAO extends ConexaoBD {
         Connection conn = null;
         Filial f = null;
 
-        String sql = "SELECT idFilial, nomeFilial, estadoFilial, cidadeFilial "
+        String sql = "SELECT idFilial, nomeFilial, estadoFilial "
                 + "FROM Filial WHERE nomeFilial = ?";
 
         try {
@@ -88,8 +87,7 @@ public class FilialDAO extends ConexaoBD {
                 int id = resultados.getInt("idFilial");
                 String nome = resultados.getString("nomeFilial");
                 String estado = resultados.getString("estadoFilial");
-                String cidade = resultados.getString("cidadeFilial");
-                f = new Filial(id, nome, estado, cidade);
+                f = new Filial(id, nome, estado);
                 break;
             }
         } catch (SQLException ex) {
@@ -123,7 +121,7 @@ public class FilialDAO extends ConexaoBD {
         Statement stmt = null;
         Connection conn = null;
 
-        String sql = "SELECT idFilial, nomeFilial, estadoFilial, cidadeFilial FROM Filial ";
+        String sql = "SELECT idFilial, nomeFilial, estadoFilial FROM Filial ";
 
         List<Filial> lista = new ArrayList<>();
 
@@ -136,9 +134,8 @@ public class FilialDAO extends ConexaoBD {
                 int id = resultados.getInt("idFilial");
                 String nome = resultados.getString("nomeFilial");
                 String estado = resultados.getString("estadoFilial");
-                String cidade = resultados.getString("cidadeFilial");
 
-                Filial filial = new Filial(id, nome, estado, cidade);
+                Filial filial = new Filial(id, nome, estado);
                 lista.add(filial);
             }
 

@@ -5,10 +5,10 @@
  */
 package br.senac.tads.pi3.projetox;
 
+import br.senac.tads.pi3.dao.FilialDAO;
 import br.senac.tads.pi3.dao.ProdutoDAO;
 import br.senac.tads.pi3.models.Produto;
 import java.io.IOException;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,6 +68,9 @@ public class AlterarProdutoServlet02 extends HttpServlet {
         produto = new Produto(id, nome, valor, quantidade, tipo, descricao);
 
         dao.atualizarProduto(produto);
+        FilialDAO daoF = new FilialDAO();
+
+        request.setAttribute("listaFilial", daoF.listar());
         request.setAttribute("produto", "Produto: ''" + request.getParameter("nome") + "'' foi alterada com sucesso!!");
 
 //                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);

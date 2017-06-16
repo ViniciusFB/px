@@ -485,8 +485,8 @@ public class ProdutoDAO extends ConexaoBD {
         Connection conn = null;
 
         String sql = "INSERT INTO ProdutosExcluidos "
-                + "(idProduto, nomeProduto, quantidade, valorProduto, excluidoPor, dataExclusao, idFilial) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + "(idProduto, nomeProduto, quantidade, valorProduto, excluidoPor, dataExclusao) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             conn = obterConexao();
@@ -499,7 +499,7 @@ public class ProdutoDAO extends ConexaoBD {
             stmt.setDouble(4, produto.getValor());
             stmt.setString(5, produto.getFuncio());
             stmt.setTimestamp(6, new java.sql.Timestamp(System.currentTimeMillis()));
-            stmt.setInt(7, produto.getId());
+//            stmt.setInt(7, produto.getIdFilial());
 
             stmt.execute();
 

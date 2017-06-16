@@ -5,8 +5,10 @@ package br.senac.tads.pi3.projetox;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import br.senac.tads.pi3.dao.FilialDAO;
+import br.senac.tads.pi3.dao.ProdutoDAO;
+import br.senac.tads.pi3.models.Produto;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ProjetoX
  */
-@WebServlet(name = "EstoqueServlet01", urlPatterns = {"/EstoqueServlet01"})
-public class EstoqueServlet01 extends HttpServlet {
+@WebServlet(name = "VendaServlet01", urlPatterns = {"/VendaServlet01"})
+public class VendaServlet01 extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,11 +33,13 @@ public class EstoqueServlet01 extends HttpServlet {
         HttpSession sessao = request.getSession();
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
         
-        FilialDAO dao = new FilialDAO();
+         ProdutoDAO dao = new ProdutoDAO();
+        List<Produto> produto = dao.listar();
 
-        request.setAttribute("listaFilial", dao.listar());
+        request.setAttribute("listaProdutos", produto);
+        
         //Comando que ira chamar a JSP passada no parametro
-        request.getRequestDispatcher("WEB-INF/jsp/estoque.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/jsp/vendas.jsp").forward(request, response);
     }
 
     @Override

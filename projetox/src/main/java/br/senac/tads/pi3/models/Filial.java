@@ -9,29 +9,25 @@ public class Filial {
     private int id;
     private String nome;
     private String estado;
-    private String cidade;
 
     public Filial() {
     }
 
-    public Filial(int id, String nome, String estado, String cidade) {
+    public Filial(int id, String nome, String estado) {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
-        this.cidade = cidade;
     }
 
-    public Filial(String nome, String estado, String cidade) {
+    public Filial(String nome, String estado) {
         this.nome = nome;
         this.estado = estado;
-        this.cidade = cidade;
     }
     
     public Filial(Filial filial) {
         this.id = filial.id;
         this.nome = filial.nome;
         this.estado = filial.estado;
-        this.cidade = filial.cidade;
     }
 
     
@@ -58,14 +54,6 @@ public class Filial {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
     }
 
 }

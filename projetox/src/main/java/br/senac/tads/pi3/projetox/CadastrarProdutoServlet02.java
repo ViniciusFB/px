@@ -100,6 +100,7 @@ public class CadastrarProdutoServlet02 extends HttpServlet {
             dao.incluirComTransacao(novo);
 
             request.setAttribute("produto", "Produto: ''" + request.getParameter("nome") + "'' foi cadastrado com sucesso!!");
+            request.setAttribute("listaFilial", df.listar());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/cadastrarProduto.jsp").forward(request, response);
 
         } else {
