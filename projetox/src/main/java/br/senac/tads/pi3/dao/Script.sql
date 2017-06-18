@@ -110,3 +110,7 @@ INSERT INTO FILIAL (nomeFilial, estadoFilial) VALUES ('MATRIZ SP', 'SP');
 INSERT INTO FILIAL (nomeFilial, estadoFilial) VALUES ('FILIAL RECIFE', 'PE');
 INSERT INTO FILIAL (nomeFilial, estadoFilial) VALUES ('FILIAL PORTO ALEGRE', 'RS');
 INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto, CADASTRADOPOR, DATACADASTRO, disponivel, idFilial) VALUES ('Pro2dut66', 29891, 'Bolsa',  5, 'nada', 589, 'Administrador', '2017-06-03 23:16:48.113', true, 2);
+
+ INSERT INTO Funcionario
+(nomeFuncionario, sobrenomeFuncionario, dataNasc, cpfFuncionario, emailFuncionario,telefoneFuncionario, cargo, login, senha)
+ VALUES ('Administrador', 'X', '1990-01-01' , '000.000.000-00', 'administrador@projetox.com', '1111111111', 'Admin', 'admin', 'admin');

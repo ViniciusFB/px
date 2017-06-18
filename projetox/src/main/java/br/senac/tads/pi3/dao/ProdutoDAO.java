@@ -179,6 +179,7 @@ public class ProdutoDAO extends ConexaoBD {
         }
         return lista;
     }
+
     public List<Produto> pesquisarProdutoNomeFilial(String nome, int idFilial) throws SQLException, ClassNotFoundException {
 
         PreparedStatement stmt = null;
@@ -298,7 +299,6 @@ public class ProdutoDAO extends ConexaoBD {
             stmt.setBoolean(9, true);
             stmt.setInt(10, produto.getIdFilial());
 
-            
             stmt.executeUpdate();
 
             // ResultSet para recuperar o ID gerado automaticamente no banco de dados.
@@ -582,6 +582,67 @@ public class ProdutoDAO extends ConexaoBD {
             }
         }
         return lista;
+    }
+
+    public void updateQuantidade(int id, int qtd, int qtdAtual, String tipoOperacao) throws SQLException {
+        Statement stmt = null;
+        Connection conn = null;
+        String sql;
+        try {
+            int valorAtual = 0;//Variavel local somente para este metodo
+            conn = obterConexao();
+            if (tipoOperacao.equals("Venda")) {//Se for venda é subtraído a quantidade em estoque
+                valorAtual = qtdAtual - qtd;
+            } else {
+                valorAtual = qtdAtual + qtd;//Se for entrada é incrementada a quantidade em estoque
+            }
+            sql = "UPDATE Produto SET quantidade = " + valorAtual + " WHERE idProduto = " + id;
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Erro ao alterar quantidade do produto: " + e);
+        } finally {
+//            Conexao.fechaConexao(this.conn);
+            conn.close();
+        }
+    }
+
+    public int somaProdutoEmEstoque(int id) throws SQLException {
+        int soma = 0;
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        String sql;
+        ResultSet resultados = null;
+        try {
+            conn = obterConexao();
+            sql = "SELECT quantidade FROM Produto WHERE Produto.idProduto = " + id;
+            stmt = conn.prepareStatement(sql);
+            resultados = stmt.executeQuery();
+            resultados.next();
+            soma = resultados.getInt(1);
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            // Código colocado aqui para garantir que a conexão com o banco
+            // seja sempre fechada, independentemente se executado com sucesso
+            // ou erro.
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return soma;
     }
 
 }

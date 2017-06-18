@@ -80,6 +80,63 @@ public class FuncionarioDAO extends ConexaoBD {
         return f;
 
     }
+    public Funcionario obterFuncionarioPorLogin(String login) {
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        Funcionario f = null;
+
+        String sql = "SELECT idFuncionario, nomeFuncionario, sobrenomeFuncionario, dataNasc, "
+                + " cpfFuncionario, emailFuncionario, telefoneFuncionario, estadoFuncionario, cidadeFuncionario, cargo, login, senha "
+                + "FROM Funcionario WHERE login = ?";
+
+        try {
+            conn = obterConexao();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, login);
+            ResultSet resultados = stmt.executeQuery();
+
+            while (resultados.next()) {
+                int id = resultados.getInt("idFuncionario");
+                String nome = resultados.getString("nomeFuncionario");
+                String sobrenome = resultados.getString("sobrenomeFuncionario");
+                Date dataNasc = resultados.getDate("dataNasc");
+                String cpf = resultados.getString("cpfFuncionario");
+                String email = resultados.getString("emailFuncionario");
+                String telefone = resultados.getString("telefoneFuncionario");
+                String estado = resultados.getString("estadoFuncionario");
+                String cidade = resultados.getString("cidadeFuncionario");
+                String cargo = resultados.getString("cargo");
+                String loginf = resultados.getString("login");
+                String senha = resultados.getString("senha");
+                f = new Funcionario(id, nome, sobrenome, dataNasc, cpf, email, telefone, estado, cidade, cargo, loginf, senha);
+                break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // Código colocado aqui para garantir que a conexão com o banco
+            // seja sempre fechada, independentemente se executado com sucesso
+            // ou erro.
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return f;
+
+    }
 
     public List<Funcionario> listar() {
         Statement stmt = null;
@@ -301,6 +358,7 @@ public class FuncionarioDAO extends ConexaoBD {
         }
 
     }
+
     public void atualizarFuncionario(Funcionario funcionario) {
 
         PreparedStatement stmt = null;
@@ -344,6 +402,87 @@ public class FuncionarioDAO extends ConexaoBD {
                 }
             }
         }
+    }
+
+    public String selecionaNomeByLoginSenha(String login, String senha) throws SQLException {
+        String nome = null;
+        ResultSet resultSet;
+        String sql = null;
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        try {
+            conn = obterConexao();
+            sql = "SELECT nomeFuncionario FROM Funcionario WHERE Funcionario.login = '" + login
+                    + "' and Funcionario.senha = '" + senha + "'";
+            stmt = conn.prepareStatement(sql);
+
+            resultSet = stmt.executeQuery();
+            resultSet.next();
+            nome = resultSet.getString(1);
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            // Código colocado aqui para garantir que a conexão com o banco
+            // seja sempre fechada, independentemente se executado com sucesso
+            // ou erro.
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return nome;
+    }
+
+    public String selecionaHashSenha(String login) throws SQLException {
+        String senha = null;
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        String sql = null;
+        ResultSet resultSet;
+        Funcionario funcionario = null;
+        try {
+            conn = obterConexao();
+            sql = "SELECT * FROM Funcionario WHERE Funcionario.login = '" + login + "'";
+
+            stmt = conn.prepareStatement(sql);
+            resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                funcionario.setCargo(resultSet.getString(10));
+                senha = resultSet.getString(12);
+            }
+        } catch (Exception e) {
+            System.out.println("\nErro ao selecionar senha do funcionario: " + e);
+        }finally {
+            // Código colocado aqui para garantir que a conexão com o banco
+            // seja sempre fechada, independentemente se executado com sucesso
+            // ou erro.
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return senha;
     }
 
 }

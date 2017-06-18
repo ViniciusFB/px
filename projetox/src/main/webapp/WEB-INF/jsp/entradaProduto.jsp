@@ -1,28 +1,25 @@
 <%-- 
-    Document   : estoque
-    Created on : 03/06/2017, 21:25:08
-    Author     : Vinicius Ferreira Batista
+    Document   : EntradaProd
+    Created on : 03/06/2016, 10:58:03
+    Author     : AX4B
 --%>
 
-<%@page import="br.senac.tads.pi3.models.Produto"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="ErroGenerico.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html> 
     <head>
-        <title>Realizar Venda</title>
+        <title>Entrada de Produto</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/vendas.css"/>
+        <link rel="stylesheet" type="text/css" href="css/funcionario.css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link href="css/cadastros.css" rel="stylesheet">
         <script src="js/Funcionario.js" type="text/javascript"></script>
         <link rel="shortcut icon" type="image/png" href="imagens/favicon.png"/>
-
     </head>
     <body>
         <div id="interface">
@@ -47,38 +44,52 @@
             </header>
 
             <section id="corpo">
-                <form method="post" action="VendaServlet02" class="form-inline">
-                    <legend>Realizar Venda</legend>
+                <form method="post" action="EntradaProdServlet01" class="form-inline">
+                    <legend>Entrada de Produto</legend>
                     <fieldset>
+
                         <div class="form-group">
                             <div class="input-group">
-                                <label class="input-group-addon" for="idCliente">ID do Cliente: </label>
-                                <input type="text" name="idCliente" value="${idCliente}" id="idCliente" maxlength="10" placeholder="ID do Cliente" class="form-control" required style="width: 150px;"/>
+                                <label class="input-group-addon" for="idProduto">ID do Produto: </label>
+                                <input type="text" name="idProduto" value="${idProduto}" id="idProduto" maxlength="10" placeholder="ID do Produto" class="form-control" required style="width: 150px;"/>
                             </div>
                             <button name="validar" id="validar" class="btn btn-info">Pesquisar</button></p>
 
                             </br>
 
                             <div class="input-group">
-                                <label class="input-group-addon" for="nomeCliente">Nome do Cliente: </label>
-                                <input type="text" name="nomeCliente" value="${nomeCliente}" id="nomeCliente" disabled class="form-control" style="width: 200px;"/>
+                                <label class="input-group-addon" for="nomeProduto">Nome do Produto: </label>
+                                <input type="text" name="nomeProduto" value="${nomeProduto}" id="nomeProduto" disabled class="form-control" style="width: 200px;"/>
                             </div>
 
+                            </br></br>
                             <div class="input-group">
-                                <label class="input-group-addon" for="cpfCliente">CPF do Cliente: </label>
-                                <input type="text" name="cpfCliente" value="${cpfCliente}" id="cpfCliente" disabled class="form-control" style="width: 200px;"/>
+                                <label class="input-group-addon" for="qtdeEstoque">Qtd no Estoque: </label>
+                                <input type="text" name="qtdeEstoque" value="${qtdeEstoque}" id="qtdeEstoque" disabled class="form-control" style="width: 215px;"/>
                             </div>
 
 
                         </div>
+
                         </br>
+                        </br>
+                        </br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="input-group-addon" for="qtde">Adicionar Qtde:</label>
+                                <input type="number" name="qtde" value="0" style="width: 200px;" min="0" max="1000" id="qtde" placeholder="Quantidade para ser adicionada" class="form-control"/>
+                            </div>
+                        </div>
+
                     </fieldset>
                 </form>
                 </br>
-                <td style="text-align: center" id="alterar"><a class="btn btn-success" href="VendaServlet03?idCliente=${idCliente}">Verificar e Prosseguir</a></td>
-                </br></br>
-                ${erro}
 
+                <td style="text-align: center" id="alterar"><a class="btn btn-success" href="EntradaProdServlet02?idProduto=${idProduto}">Adicionar</a></td>
+
+                </br></br>
+                <p>${entradamsg}</p>
+                
             </section>
             <aside id="menuLateral">
                 <ul>
@@ -97,7 +108,10 @@
 
                         <c:when test="${cargo=='Estoquista'}">
                             <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
-                            <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> </c:when>
+                            <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li>
+                            <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTOS</a></li>
+                                
+                        </c:when>
 
                         <c:when test="${cargo=='Vendedor'}">
                             <li><a href="/projetox/VendaServlet01">VENDER<br>PRODUTOS</a></li>
@@ -113,13 +127,10 @@
                 </ul>
             </aside>
 
-
+            <footer id="rodape">
+                <p>Copyright<!--Simbolo copyright -->&copy; 2016 - BY JAVAHELL TEAM<br></p>
+            </footer>
 
         </div>
     </body>
-
-    <footer class="footer">
-        <p class="text-center">Copyright &copy; 2017, ProjetoX</p>
-    </footer>
-
 </html>

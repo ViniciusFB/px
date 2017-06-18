@@ -23,8 +23,12 @@
  */
 package br.senac.tads.pi3.projetox;
 
-import br.senac.tads.pi3.models.UsuarioSistema;
+import br.senac.tads.pi3.dao.FuncionarioDAO;
+import br.senac.tads.pi3.models.Funcionario;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,23 +52,10 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-  public void doGet(HttpServletRequest request,
-	  HttpServletResponse response)
-	  throws ServletException, IOException {
-
-    // Verifica se usuário já se logou, se positivo redireciona para tela principal
-    HttpSession sessao = request.getSession(false);
-    if (sessao != null && sessao.getAttribute("usuario") != null) {
-     RequestDispatcher dispatcher
-	    = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
-    dispatcher.forward(request, response);
-      return;
+    public void doGet(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
     }
-
-    // Apresenta tela de login para o usuário
-    
-
-  }
 
     /**
      *
@@ -74,31 +65,35 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-  public void doPost(HttpServletRequest request,
-	  HttpServletResponse response)
-	  throws ServletException, IOException {
-    // Recupera dados preenchidos pelo usuário
-    String usuario = request.getParameter("usuario");
-    String senhaDigitada = request.getParameter("senha");
+    public void doPost(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
 
-    // Compara com o usuário/senha previamente cadastrado
-    UsuarioSistema usuarioSistema
-	    = UsuarioSistema.obterUsuario(usuario, senhaDigitada);
-    if (usuarioSistema != null) {
-      // Usuario existe e a senha está correta
-      // Caso exista, invalida a sessão anterior (www.owasp.org)
-      HttpSession sessao = request.getSession(false);
-      if (sessao != null) {
-	sessao.invalidate();
-      }
-      // Criar uma sessão
-      sessao = request.getSession(true);
-      sessao.setAttribute("usuario", usuarioSistema);
+        HttpSession sessao = request.getSession();
+        Funcionario funcionario = null;
+        FuncionarioDAO dao = new FuncionarioDAO();
+        String usuario = request.getParameter("usuario");
 
-      this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
-    } else {
-      this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/erroLogin.jsp").forward(request, response);
+        try {
+            funcionario = new Funcionario((Funcionario) dao.obterFuncionarioPorLogin(usuario));
+
+//            String senha = dao.selecionaHashSenha(request.getParameter("username"));
+            String senha = funcionario.getSenha();
+            sessao.setAttribute("cargo", funcionario.getCargo());
+            String senhaDigitada = request.getParameter("senha");
+            sessao.setAttribute("usuario", dao.selecionaNomeByLoginSenha(request.getParameter("usuario"), senha));
+
+            if (senha == null) {
+                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/erroLogin.jsp").forward(request, response);
+            } else if (senha.equals(senhaDigitada)) {
+                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
+            } else {
+                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/erroLogin.jsp").forward(request, response);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-  }
-
 }

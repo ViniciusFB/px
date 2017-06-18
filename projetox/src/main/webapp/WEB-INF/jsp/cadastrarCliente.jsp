@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 
 <html class="no-js" lang="">
@@ -13,9 +15,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cadastrar Cliente</title>
-       <link rel="stylesheet" type="text/css" href="css/Funcionario.css"/>
+        <link rel="stylesheet" type="text/css" href="css/funcionario.css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        
+
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link href="css/cadastros.css" rel="stylesheet">
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -24,9 +26,10 @@
         <link rel="shortcut icon" type="image/png" href="imagens/favicon.png"/>
     </head>
     <body>
-         <div id="interface">
+        <div id="interface">
             <header id="logado">
-                <p>Usuário logado: ${sessionScope.usuario.nomeCompleto}!</p>
+                <p>Usuário logado: ${usuario}</p>
+                <!--<p>Cargo: ${cargo}</p>-->
             </header>
             <header id="cabecalho">
                 <a href="/projetox/home">
@@ -36,11 +39,16 @@
                 <a href="/projetox/logout"><p>SAIR</p></a>
             </header>
             <header id="menuDinamico" align="center">
-                <img id="imgMenuDinamico" src="_imagens/cadastraFunc.jpg"/>
+                <c:choose>
+                    <c:when test="${cargo=='Admin'}"><img src="imagens/adm.png" id="imgMenuDinamico"/></c:when>
+                    <c:when test="${cargo=='Vendedor'}"><img src="imagens/vendedor.png" id="imgMenuDinamico"/></c:when>
+                    <c:when test="${cargo=='Gerente'}"><img src="imagens/gerente.png" id="imgMenuDinamico"/></c:when>
+                    <c:when test="${cargo=='Estoquista'}"><img src="imagens/estoquista.png" id="imgMenuDinamico"/></c:when>
+                </c:choose>
             </header>
 
             <section id="corpo">
-                 <form class="form-horizontal" action="CadastrarCliServlet02" method="post"  id="form_cadastro">
+                <form class="form-horizontal" action="CadastrarCliServlet02" method="post"  id="form_cadastro">
 
                     <center>
                         <div class="register-block">
@@ -202,25 +210,49 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label"></label>
                             <div class="col-md-4">
-                                <input type="submit" id="btnCadastro" value="Cadastrar" />
+                                <input class="btn btn-success" type="submit" style="width: 200px;" id="btnCadastro" value="Cadastrar" onclick="return validar()"/>
+
                             </div>
                         </div>
+                        
+                         </br></br>
+                    </br></br>
+                    <p id="mensagem" class="text-center" style="background-color: hsla(120,100%,50%,0.3);"> ${cliente} </p>
 
                     </center>
                 </form>
             </section>
 
-             <aside id="menuLateral">
+            <aside id="menuLateral">
                 <ul>
-                    <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
-                    <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> 
-                    <li><a href="/projetox/VendaServlet01">VENDER<br>PRODUTOS</a></li> 
-                    <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTO</a></li>
-                    <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> 
-                    <li><a href="/projetox/FuncionarioServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
-                    <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li> 
-                    <li><a href="/projetox/ClienteServlet01">CONSULTAR<br>CLIENTES</a></li> 
-                    <li><a href="/projetox/RelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> 
+                    <c:choose>
+                        <c:when test="${cargo=='Admin'}">
+                            <li><a href="/projetox/CadastrarFuncServlet01">CADASTRAR<br>FUNCIONÁRIO</a></li> 
+                            <li><a href="/projetox/FuncionarioServlet01">CONSULTAR<br>FUNCIONÁRIOS</a></li> 
+                            <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
+                            <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li>
+                            <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li>
+                            <li><a href="/projetox/ClienteServlet01">CONSULTAR<br>CLIENTES</a></li>
+                            <li><a href="/projetox/VendaServlet01">VENDER<br>PRODUTOS</a></li>
+                            <li><a href="/projetox/RelatorioServlet01">GERAR<br>RELATÓRIOS</a></li>
+
+                        </c:when>                    
+
+                        <c:when test="${cargo=='Estoquista'}">
+                            <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
+                            <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li> </c:when>
+
+                        <c:when test="${cargo=='Vendedor'}">
+                            <li><a href="/projetox/VendaServlet01">VENDER<br>PRODUTOS</a></li>
+                            <li><a href="/projetox/CadastrarCliServlet01">CADASTRAR<br>CLIENTE</a></li>
+                            <li><a href="/projetox/ClienteServlet01">CONSULTAR<br>CLIENTES</a></li>
+
+                        </c:when>
+
+                        <c:when test="${cargo=='Gerente'}">
+                            <li><a href="/projetox/RelatorioServlet01">GERAR<br>RELATÓRIOS</a></li> </c:when>
+
+                    </c:choose>
                 </ul>
             </aside>
 

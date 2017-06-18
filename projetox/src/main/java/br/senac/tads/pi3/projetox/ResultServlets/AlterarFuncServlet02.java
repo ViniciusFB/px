@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.projetox;
+package br.senac.tads.pi3.projetox.ResultServlets;
 
 import br.senac.tads.pi3.dao.FuncionarioDAO;
 import br.senac.tads.pi3.models.Funcionario;

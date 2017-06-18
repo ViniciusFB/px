@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.projetox;
+package br.senac.tads.pi3.projetox.ResultServlets;
 
 import br.senac.tads.pi3.dao.ClienteDAO;
 import br.senac.tads.pi3.dao.ProdutoDAO;
@@ -52,7 +52,6 @@ public class VendaServlet02 extends HttpServlet {
         boolean erro = false;
         ClienteDAO dao = new ClienteDAO();
         Cliente cliente = null;
-        Produto prod = null;
         ProdutoDAO daoP = new ProdutoDAO();
         List<Produto> produto = daoP.listar();
 
@@ -62,17 +61,16 @@ public class VendaServlet02 extends HttpServlet {
             cliente = new Cliente((Cliente) dao.obterCliente(Integer.parseInt(request.getParameter("idCliente"))));
         } catch (NullPointerException | NumberFormatException e) {
             System.out.println(e);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/ErroGenerico.jsp").forward(request, response);
+            request.setAttribute("erro", "Nenhum cliente foi encontrado com o ID informado!");
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/vendas.jsp").forward(request, response);
 
         }
-        
 
         request.setAttribute("idCliente", cliente.getId());
         request.setAttribute("nomeCliente", cliente.getNome());
         request.setAttribute("cpfCliente", cliente.getCpf());
-        
+
         this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/vendas.jsp").forward(request, response);
-   
 
     }
 }

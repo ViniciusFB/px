@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.projetox;
+package br.senac.tads.pi3.projetox.ResultServlets;
 
 import br.senac.tads.pi3.dao.ClienteDAO;
 import br.senac.tads.pi3.models.Cliente;
@@ -76,8 +76,8 @@ public class CadastrarCliServlet02 extends HttpServlet {
 //            usuario.setSenha(cargo);
 //            usuario.setNomeCompleto(cargo);
 //            usuario.setPapeis(cargo);
-            request.setAttribute("funcionario", "Funcionario: ''" + request.getParameter("nome") + "'' foi cadastrado com sucesso!!");
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/cadastrarFuncionario.jsp").forward(request, response);
+            request.setAttribute("cliente", "Cliente: ''" + request.getParameter("nome") + "'' foi cadastrado com sucesso!!");
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/cadastrarCliente.jsp").forward(request, response);
         } else {
             // Tem erro no preenchimento dos dados.
             // Reapresenta o formulário para o usuário indicando os erros.

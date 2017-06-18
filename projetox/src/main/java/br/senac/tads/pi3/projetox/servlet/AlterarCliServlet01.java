@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.projetox;
+package br.senac.tads.pi3.projetox.servlet;
 
-import br.senac.tads.pi3.dao.FuncionarioDAO;
+import br.senac.tads.pi3.dao.ClienteDAO;
+import br.senac.tads.pi3.models.Cliente;
 import br.senac.tads.pi3.models.Funcionario;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Vinicius Ferreira Batista
  */
-@WebServlet(name = "AlterarFuncServlet01", urlPatterns = {"/AlterarFuncServlet01"})
-public class AlterarFuncServlet01 extends HttpServlet {
+@WebServlet(name = "AlterarCliServlet01", urlPatterns = {"/AlterarCliServlet01"})
+public class AlterarCliServlet01 extends HttpServlet {
 
     /**
      * Neste exemplo, somente apresenta a tela do formulário
@@ -41,27 +40,26 @@ public class AlterarFuncServlet01 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        FuncionarioDAO dao = new FuncionarioDAO();
-        Funcionario funcionario = null;
+        ClienteDAO dao = new ClienteDAO();
+        Cliente cliente = null;
 
         try {
-            funcionario = new Funcionario((Funcionario) dao.obterFuncionario(Integer.parseInt(request.getParameter("idFuncionario"))));
+            cliente = new Cliente((Cliente) dao.obterCliente(Integer.parseInt(request.getParameter("idCliente"))));
         } catch (NullPointerException | NumberFormatException e) {
             System.out.println(e);
             this.getServletContext().getRequestDispatcher("/WEB-INF/ErroGenerico.jsp").forward(request, response);
         }
-        request.setAttribute("id", funcionario.getId());
-        request.setAttribute("nome", funcionario.getNome());
-        request.setAttribute("sobrenome", funcionario.getSobrenome());
-        request.setAttribute("dataNasc", funcionario.getDataNasc());
-        request.setAttribute("cpf", funcionario.getCpf());
-        request.setAttribute("email", funcionario.getEmail());
-        request.setAttribute("telefone", funcionario.getTelefone());
-        request.setAttribute("estado", funcionario.getEstado());
-        request.setAttribute("cargo", funcionario.getCargo());
-        request.setAttribute("login", funcionario.getLogin());
-        request.setAttribute("senha", funcionario.getSenha());
-        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/alterarFuncionario.jsp").forward(request, response);
+        request.setAttribute("id", cliente.getId());
+        request.setAttribute("nome", cliente.getNome());
+        request.setAttribute("sobrenome", cliente.getSobrenome());
+        request.setAttribute("dataNasc", cliente.getDataNasc());
+        request.setAttribute("cpf", cliente.getCpf());
+        request.setAttribute("email", cliente.getEmail());
+        request.setAttribute("telefone", cliente.getTelefone());
+        request.setAttribute("estado", cliente.getEstado());
+        request.setAttribute("cidade", cliente.getCidade());
+        request.setAttribute("endereco", cliente.getEndereco());
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/alterarCliente.jsp").forward(request, response);
     }
 
     /**

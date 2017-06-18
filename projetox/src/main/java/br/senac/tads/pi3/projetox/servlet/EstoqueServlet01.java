@@ -1,10 +1,11 @@
+package br.senac.tads.pi3.projetox.servlet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.projetox;
-
+import br.senac.tads.pi3.dao.FilialDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,28 +18,30 @@ import javax.servlet.http.HttpSession;
  *
  * @author ProjetoX
  */
-@WebServlet(name = "CadastrarCliServlet01", urlPatterns = {"/CadastrarCliServlet01"})
-public class CadastrarCliServlet01 extends HttpServlet {
+@WebServlet(name = "EstoqueServlet01", urlPatterns = {"/EstoqueServlet01"})
+public class EstoqueServlet01 extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sessao = request.getSession(); 
+        HttpSession sessao = request.getSession();
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
         
+        FilialDAO dao = new FilialDAO();
+
+        request.setAttribute("listaFilial", dao.listar());
         //Comando que ira chamar a JSP passada no parametro
-        request.getRequestDispatcher("WEB-INF/jsp/cadastrarCliente.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/jsp/estoque.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     @Override

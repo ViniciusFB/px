@@ -85,6 +85,7 @@ public class Funcionario {
         this.cidade = funcionario.cidade;
         this.cargo = funcionario.cargo;
         this.login = funcionario.login;
+        this.senha = funcionario.senha;
     }
 
     public Funcionario(int id, String nome, String sobrenome, Date dataNasc, String cpf, String email, String telefone, String login) {
