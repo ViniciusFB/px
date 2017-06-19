@@ -70,6 +70,8 @@ public class AlterarFuncServlet02 extends HttpServlet {
         funcionario = new Funcionario(id, nome, sobrenome, dataNasc, cpf, email, telefone, login);
 
         dao.atualizarFuncionario(funcionario);
+
+        request.setAttribute("listaFuncionarios", dao.listar());
         request.setAttribute("funcionario", "Funcionario: ''" + nome + "'' foi alterado com sucesso!!");
 
 //                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);

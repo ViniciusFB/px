@@ -45,109 +45,72 @@
                 </c:choose>
             </header>
             <section id="corpo">
-                <legend>Alterar Produto</legend>
-
-
-                <form class="form-horizontal" action="AlterarProdutoServlet02" method="post" id="form_cadastro">
-
+                <form class="form-inline" action="AlterarProdutoServlet02" method="post" id="form_cadastro">
                     <center>
-                        <div class="register-block">
+                        <legend>Cadastro de Produto</legend>
+                        <fieldset>
+                            <div class="form-group">
 
-                            <table>
-
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >ID</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                            <input name="id" class="form-control" required type="text" value="${id}" readonly="true">
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Nome</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                                            <input  name="nome"class="form-control" required type="text" value="${nome}">
-                                        </div>
-                                    </div>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="nome">ID Produto:</label>
+                                    <input  name="id" value="${id}" readonly style="width:200px; margin-right: 50px;" maxlength="50" class="form-control" type="text">
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >Código</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                            <input name="codigo" class="form-control" required type="text" value="${codigo}" readonly="true">
-                                        </div>
-                                    </div>
-                                </div> 
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="codigo">Código</label> 
+                                    <input name="codigo" readonly value="${codigo}" placeholder="Codigo" style="width:200px; margin-right: 0px;" maxlength="10" class="form-control" type="text">
+                                </div>
+
+                                </br></br>
+
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="nome">Nome:</label>
+                                    <input  name="nome" required value="${nome}" placeholder="Nome do Produto" style="width:220px; margin-right: 50px;" maxlength="50" class="form-control" type="text">
+                                </div>
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:200px;" for="valor">Valor</label> 
+                                    <input class="form-control" value="${valor}" placeholder="Digite o Preço" style="width:200px; margin-right: 0px;" type="text" name="valor" required/>
+                                </div>
+
+                                </br></br>
+
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:200px;" for="tipo">Tipo</label>
+                                    <select style="width:200px; margin-right:50px;" required readonly="true" name="tipo" class="form-control selectpicker">
+                                         <option value="${tipo}" selected>${tipo}</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:200px;" for="quantidade">Qtde</label>  
+                                    <input name="quantidade" value="${quantidade}" readonly placeholder="Quantidade" min="1" max="1000" style="width:170px; margin-right: 0px;" class="form-control" type="number">
+                                </div>
+
+                                </br></br></br>
 
                                 <!-- Text input-->
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >Valor</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                                            <input name="valor" class="form-control" required type="text" value="${valor}">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group"> 
-                                    <label class="col-md-4 control-label">Tipo</label>
-                                    <div class="col-md-4 selectContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="tipo" class="form-control selectpicker" required readonly="true">
-                                                <option value="${tipo}" selected>${tipo}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Quantidade</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-sort"></i></span>
-                                            <input name="quantidade" class="form-control" disabled type="number" min="1" max="1000" value="${quantidade}">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Descrição</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <textarea rows="6" style="width: 15em; resize: none;" id="txtdescricao" name="descricao" value=${descricao}></textarea>
-                                        </div>
-                                    </div>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:50px;" for="descricao">Descrição: </label>  
+                                    <textarea class="form-control" rows="6" maxlength="255" style="width: 30em; margin-right:50px; resize: none;" id="txtdescricao" name="descricao">${descricao}</textarea>
                                 </div>
 
 
-                            </table>
-                        </div>
-                        <!-- Success message -->
-                        <!--<div class="alert alert-success" role="alert" id="success_message">Sucesso <i class="glyphicon glyphicon-thumbs-up"></i> Cadastro Realizado com Sucesso !!.</div>-->
-
-                        <!-- Button -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label"></label>
-                            <div class="col-md-4">
-                                <input type="submit" value='Alterar' name="alterarBotao" id="btnCadastro"/>
-                                ${produto}
                             </div>
-                        </div>
-
+                        </fieldset>
                     </center>
+                    </br></br>
+                    <!-- Button -->
+                    <div style="left: 45%; position: absolute;">
+                        <input class="btn btn-warning" type="submit" style="width: 200px;" name="alterarBotao" id="btnCadastro" value="Alterar" onclick="return validar()"/>
+                    </div>
+
+                    </br></br>
+                    </br></br>
+                    <p id="mensagem" class="text-center" style="background-color: hsla(120,100%,50%,0.3);"> ${produto} </p>
                 </form>
             </section>
 

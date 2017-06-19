@@ -53,7 +53,19 @@ public class CadastrarFuncServlet02 extends HttpServlet {
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
 
         String nome = request.getParameter("nome");
+        nome = nome.trim();
+        if (nome == null || nome.length() < 3 || nome.equals("")) {
+            erro = true;
+            request.setAttribute("funcionario", "Não foi possível cadastrar o funcionario!");
+        }
+
         String sobrenome = request.getParameter("sobrenome");
+        sobrenome = sobrenome.trim();
+        if (sobrenome == null || sobrenome.length() < 3 || sobrenome.equals("")) {
+            erro = true;
+            request.setAttribute("funcionario", "Não foi possível cadastrar o funcionario!");
+        }
+
         Date dataNasc = Date.valueOf(request.getParameter("dataNasc"));
         String cpf = request.getParameter("cpf");
         String email = request.getParameter("email");
@@ -71,11 +83,6 @@ public class CadastrarFuncServlet02 extends HttpServlet {
             FuncionarioDAO dao = new FuncionarioDAO();
             dao.incluirComTransacao(novo);
 
-//            UsuarioSistema usuario = new UsuarioSistema();
-//            usuario.setUsuario(cargo);
-//            usuario.setSenha(cargo);
-//            usuario.setNomeCompleto(cargo);
-//            usuario.setPapeis(cargo);
             request.setAttribute("funcionario", "Funcionario: ''" + request.getParameter("nome") + "'' foi cadastrado com sucesso!!");
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/cadastrarFuncionario.jsp").forward(request, response);
         } else {

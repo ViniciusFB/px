@@ -87,7 +87,7 @@
 
                                 <div class="input-group" style="width: 200px;">
                                     <label class="input-group-addon" style="width:100px;" for="telefone">Telefone: </label>
-                                    <input id="telefone" name="telefone" style="width:218px; margin-right: 0px;" maxlength="14" required placeholder="(xx)xxxxx-xxxx" class="form-control" type="text">
+                                    <input id="telefone" name="telefone" style="width:218px; margin-right: 0px;" maxlength="15" required placeholder="(xx)xxxxx-xxxx" class="form-control" type="text">
 
                                 </div>
 
@@ -100,29 +100,29 @@
                                         <option value="" disabled selected>Selecione um Estado...</option>
                                         <option value="Acre">Acre</option>
                                         <option value="Alagoas">Alagoas</option>
-                                        <option value="Amapá">Amapá</option>
+                                        <option value="Amapa">Amapá</option>
                                         <option value="Amazonas">Amazonas</option>
                                         <option value="Bahia">Bahia</option>
-                                        <option value="Ceará">Ceará</option>
+                                        <option value="Ceara">Ceará</option>
                                         <option value="Distrito Federal">Distrito Federal</option>
                                         <option value="Espirito Santo">Espírito Santo</option>
-                                        <option value="Goiás">Goiás</option>
-                                        <option value="Maranhão">Maranhão</option>
+                                        <option value="Goias">Goiás</option>
+                                        <option value="Maranhao">Maranhão</option>
                                         <option value="Mato Grosso">Mato Grosso</option>
                                         <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
                                         <option value="Minas Gerais">Minas Gerais</option>
-                                        <option value="Pará">Pará</option>
-                                        <option value="Paraíba">Paraíba</option>
-                                        <option value="Paraná">Paraná</option>
+                                        <option value="Para">Pará</option>
+                                        <option value="Paraiba">Paraíba</option>
+                                        <option value="Parana">Paraná</option>
                                         <option value="Pernambuco">Pernambuco</option>
-                                        <option value="Piauí">Piauí</option>
+                                        <option value="Piaui">Piauí</option>
                                         <option value="Rio de Janeiro">Rio de Janeiro</option>
                                         <option value="Rio Grande do Norte">Rio Grande do Norte</option>
                                         <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-                                        <option value="Rondônia">Rondônia</option>
+                                        <option value="Rondonia">Rondônia</option>
                                         <option value="Roraima">Roraima</option>
                                         <option value="Santa Catarina">Santa Catarina</option>
-                                        <option value="São Paulo">São Paulo</option>
+                                        <option value="Sao Paulo">São Paulo</option>
                                         <option value="Sergipe">Sergipe</option>
                                         <option value="Tocantins">Tocantins</option>
 
@@ -171,14 +171,7 @@
                     </br></br>
                     </br></br>
                     <p id="mensagem" class="text-center" style="background-color: hsla(120,100%,50%,0.3);"> ${funcionario} </p>
-
-
-
-
-
                 </form>
-
-
             </section>
 
             <aside id="menuLateral">
@@ -217,7 +210,7 @@
 
 
         </div>
-        <script src="js/cadastros.js"></script>
+        <script language="javascript" src="js/cadastros.js"></script>
     </body>
 
     <footer class="footer">

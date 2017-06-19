@@ -24,7 +24,7 @@
             <div>PROJETO <span>X</span></div>
         </div>
         <br>
-        <form class="form-signin" method="post" action="home">       
+        <form class="form-signin" method="post" action="login">       
             <div class="login">
                 <input type="text"  name="usuario" id="username" placeholder="Usuário: " required="" autofocus=""/>
                 <input type="password" name="senha" id="password" placeholder="Senha: " required=""/>

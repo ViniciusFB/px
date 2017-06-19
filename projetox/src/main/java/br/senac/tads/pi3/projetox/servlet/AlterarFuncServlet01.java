@@ -58,7 +58,6 @@ public class AlterarFuncServlet01 extends HttpServlet {
         request.setAttribute("email", funcionario.getEmail());
         request.setAttribute("telefone", funcionario.getTelefone());
         request.setAttribute("estado", funcionario.getEstado());
-        request.setAttribute("cargo", funcionario.getCargo());
         request.setAttribute("login", funcionario.getLogin());
         request.setAttribute("senha", funcionario.getSenha());
         this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/alterarFuncionario.jsp").forward(request, response);

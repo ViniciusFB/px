@@ -30,7 +30,7 @@
             </header>
             <header id="cabecalho">
                 <a href="/projetox/home">
-                    <img  id="imgLogo" src="imagens/px-logo.png" onclick="" title="Home"/></a>
+                    <img id="imgLogo" src="imagens/px-logo.png" onclick="" title="home"/></a>
             </header>
             <header id="logout">
                 <a href="/projetox/logout"><p>SAIR</p></a>

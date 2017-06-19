@@ -22,7 +22,8 @@
         <link href="css/cadastros.css" rel="stylesheet">
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script language="javascript" src="js/cpf.js"></script>
-        <script language="javascript" src="js/telefone.js"></script>
+        <script language="javascript" src="js/limpar.js"></script>
+        <script language src="js/telefone.js"></script>
         <link rel="shortcut icon" type="image/png" href="imagens/favicon.png"/>
     </head>
     <body>
@@ -48,178 +49,121 @@
             </header>
 
             <section id="corpo">
-                <form class="form-horizontal" action="CadastrarCliServlet02" method="post"  id="form_cadastro">
+                <form class="form-inline" action="CadastrarCliServlet02" method="post"  id="form_cadastro">
 
                     <center>
-                        <div class="register-block">
-                            <legend> Cadastro de Cliente </legend>
-
-                            <!-- Form Name -->
-
-                            <table>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Primeiro Nome</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input  name="nome" required placeholder="Primeiro Nome" class="form-control"  type="text">
-                                        </div>
-                                    </div>
+                        <legend> Cadastro de Cliente </legend>
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="nome">Nome:</label>
+                                    <input  name="nome" required placeholder="Primeiro Nome" style="width:200px; margin-right: 50px;" maxlength="50" class="form-control"  type="text">
                                 </div>
 
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >Sobrenome</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="sobrenome" required placeholder="Sobrenome" class="form-control"  type="text">
-                                        </div>
-                                    </div>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="nome">Sobrenome:</label>
+                                    <input  name="sobrenome" required placeholder="Sobrenome" style="width:200px; margin-right: 0px;" maxlength="50" class="form-control"  type="text">
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >Data de Nascimento</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                            <input name="dataNasc" required placeholder="Data de nascimento" class="form-control" min="1900-01-01" max="2017-12-31" type="Date">
-                                        </div>
-                                    </div>
+                                </br></br>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="cpf">CPF: </label>
+                                    <input name="cpf" required style="width:210px; margin-right: 50px;" placeholder="000.000.000-00" class="form-control" maxlength="14" type="text" onkeypress="javascript: mascara(this, cpf_mask)">
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >CPF</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="cpf" required placeholder="000.000.000-00" class="form-control" maxlength="14" type="text" onkeypress="javascript: mascara(this, cpf_mask)">
-                                        </div>
-                                    </div>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="nome">Nascimento: </label>
+                                    <input  name="dataNasc" required style="width:200px; margin-right: 0px;" class="form-control" min="1900-01-01" max="2017-12-31" type="date">
                                 </div>
 
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">E-Mail</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                            <input id="email" name="email" required placeholder="E-mail" class="form-control"  type="email">
-                                        </div>
-                                    </div>
-                                </div>
+                                </br></br>
 
 
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Telefone</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                            <input id="telefone" name="telefone" maxlength="14" required placeholder="(xx)xxxxx-xxxx" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="form-group"> 
-                                    <label class="col-md-4 control-label">Estado</label>
-                                    <div class="col-md-4 selectContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select required name="estado" class="form-control selectpicker">
-                                                <option value="" disabled selected>Selecione um Estado...</option>
-                                                <option value="AC">Acre</option>
-                                                <option value="AL">Alagoas</option>
-                                                <option value="AP">Amapá</option>
-                                                <option value="AM">Amazonas</option>
-                                                <option value="BA">Bahia</option>
-                                                <option value="CE">Ceará</option>
-                                                <option value="DF">Distrito Federal</option>
-                                                <option value="ES">Espírito Santo</option>
-                                                <option value="GO">Goiás</option>
-                                                <option value="MA">Maranhão</option>
-                                                <option value="MT">Mato Grosso</option>
-                                                <option value="MS">Mato Grosso do Sul</option>
-                                                <option value="MG">Minas Gerais</option>
-                                                <option value="PA">Pará</option>
-                                                <option value="PB">Paraíba</option>
-                                                <option value="PR">Paraná</option>
-                                                <option value="PE">Pernambuco</option>
-                                                <option value="PI">Piauí</option>
-                                                <option value="RJ">Rio de Janeiro</option>
-                                                <option value="RN">Rio Grande do Norte</option>
-                                                <option value="RS">Rio Grande do Sul</option>
-                                                <option value="RO">Rondônia</option>
-                                                <option value="RR">Roraima</option>
-                                                <option value="SC">Santa Catarina</option>
-                                                <option value="SP">São Paulo</option>
-                                                <option value="SE">Sergipe</option>
-                                                <option value="TO">Tocantins</option>
-
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Cidade</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                            <input name="cidade" placeholder="Cidade" class="form-control"  type="text">
-                                        </div>
-                                    </div>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="email">E-mail: </label>
+                                    <input id="email" name="email" style="width:200px; margin-right: 50px;" required placeholder="E-mail" maxlength="50" class="form-control"  type="email">
                                 </div>
 
 
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Endereço</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                            <input name="endereco" placeholder="Endereço" class="form-control" type="text">
-                                        </div>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="telefone">Telefone: </label>
+                                    <input id="telefone" name="telefone" style="width:218px; margin-right: 0px;" maxlength="15" required placeholder="(xx)xxxxx-xxxx" class="form-control" type="text">
+                                </div>
+
+                                </br></br>
+
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="telefone">Estado: </label>
+                                    <select style="width:195px; margin-right: 50px;" required name="estado" class="form-control selectpicker">
+                                        <option value="" disabled selected>Selecione um Estado...</option>
+                                        <option value="Acre">Acre</option>
+                                        <option value="Alagoas">Alagoas</option>
+                                        <option value="Amapa">Amapá</option>
+                                        <option value="Amazonas">Amazonas</option>
+                                        <option value="Bahia">Bahia</option>
+                                        <option value="Ceara">Ceará</option>
+                                        <option value="Distrito Federal">Distrito Federal</option>
+                                        <option value="Espirito Santo">Espírito Santo</option>
+                                        <option value="Goias">Goiás</option>
+                                        <option value="Maranhao">Maranhão</option>
+                                        <option value="Mato Grosso">Mato Grosso</option>
+                                        <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                        <option value="Minas Gerais">Minas Gerais</option>
+                                        <option value="Para">Pará</option>
+                                        <option value="Paraiba">Paraíba</option>
+                                        <option value="Parana">Paraná</option>
+                                        <option value="Pernambuco">Pernambuco</option>
+                                        <option value="Piaui">Piauí</option>
+                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                        <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                        <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                        <option value="Rondonia">Rondônia</option>
+                                        <option value="Roraima">Roraima</option>
+                                        <option value="Santa Catarina">Santa Catarina</option>
+                                        <option value="Sao Paulo">São Paulo</option>
+                                        <option value="Sergipe">Sergipe</option>
+                                        <option value="Tocantins">Tocantins</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="cidade">Cidade: </label>
+                                    <input name="cidade" required placeholder="Cidade" class="form-control" maxlength="50" style="width:235px; margin-right:0px;" type="text">
+
+                                </div>
+                                </br></br>
+
+                                <div class="input-group" style="width: 100px;">
+                                    <label class="input-group-addon" style="width:100px;" for="endereco">Endereço: </label>
+                                    <input name="endereco" required placeholder="Endereço" class="form-control" maxlength="50" style="width:170px; margin-right: 100px;" type="text">
+                                </div>
+
+                                <label style="width:55px;" for="genero">Gênero: </label>
+                                <div class="input-group" style="width: 200px;">
+                                    <div class="radio">
+                                        <label style="padding-left: 2px">
+                                            <input type="radio" name="genero" id="genero" value="masculino" /> Masculino  </label>
+                                        <label style="padding-left: 25px">
+                                            <input type="radio" name="genero" id="genero2" value="feminino" /> Feminino </label>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Gênero</label>
-                                    <div class="col-md-4">
-                                        <div class="radio">
-                                            <label style="padding-left: 25px">
-                                                <input type="radio" name="genero" value="masculino" /> Masculino 
-                                            </label><label style="padding-left: 25px">
-                                                <input type="radio" name="genero" value="feminino" /> Feminino
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </table>
-                        </div>
-                        <!-- Success message -->
-                        <!--<div class="alert alert-success" role="alert" id="success_message">Sucesso <i class="glyphicon glyphicon-thumbs-up"></i> Cadastro Realizado com Sucesso !!.</div>-->
+                            </div>                          
+                        </fieldset>
+                    </center>
+                    </br></br>
 
-                        <!-- Button -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label"></label>
-                            <div class="col-md-4">
-                                <input class="btn btn-success" type="submit" style="width: 200px;" id="btnCadastro" value="Cadastrar" onclick="return validar()"/>
+                    <div id="btns">
+                        <a class="btn btn-warning" style="width: 200px; margin-left: 25px; margin-right: 50px;" onclick="limparCampos(), document.getElementById('genero').checked = false, document.getElementById('genero2').checked = false">Limpar</a>
+                        <input class="btn btn-success" type="submit" style="width: 200px;" id="btnCadastro" value="Cadastrar" onclick="return validar()"/>
+                    </div>
 
-                            </div>
-                        </div>
-                        
-                         </br></br>
+                    </br></br>
                     </br></br>
                     <p id="mensagem" class="text-center" style="background-color: hsla(120,100%,50%,0.3);"> ${cliente} </p>
 
-                    </center>
                 </form>
             </section>
 
@@ -259,6 +203,7 @@
 
 
         </div>
+        <script src="js/cadastros.js"></script>
     </body>
 
     <footer class="footer">

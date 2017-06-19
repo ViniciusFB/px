@@ -1,8 +1,8 @@
-window.onload = function () {
+window.addEventListener("load", function () {
     var mensagem = document.getElementById('mensagem');
 
     fadeOut(mensagem, 15);
-};
+});
 
 
 

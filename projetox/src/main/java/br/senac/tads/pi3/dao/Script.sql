@@ -33,7 +33,7 @@ create table Cliente (
     dataNasc DATE NOT NULL,
     cpfCliente VARCHAR(14) NOT NULL UNIQUE,
     emailCliente VARCHAR(50) NOT NULL,
-    telefoneCliente VARCHAR(14) NOT NULL,
+    telefoneCliente VARCHAR(15) NOT NULL,
     estadoCliente VARCHAR(50),
     cidadeCliente VARCHAR(50),
     enderecoCliente VARCHAR(50),
@@ -48,11 +48,11 @@ create table Funcionario (
   dataNasc DATE NOT NULL,
   cpfFuncionario VARCHAR(14) NOT NULL UNIQUE,
   emailFuncionario VARCHAR(50) NOT NULL,
-  telefoneFuncionario VARCHAR(14) NOT NULL,
+  telefoneFuncionario VARCHAR(15) NOT NULL,
   estadoFuncionario VARCHAR(50),
   cidadeFuncionario VARCHAR(50),
   cargo VARCHAR(50) NOT NULL,
-  login VARCHAR(20) NOT NULL,
+  login VARCHAR(20) NOT NULL UNIQUE,
   senha VARCHAR(20) NOT NULL
 
 );
@@ -113,4 +113,13 @@ INSERT INTO Produto (nomeProduto, codigo, tipoProduto, quantidade, descricao, va
 
  INSERT INTO Funcionario
 (nomeFuncionario, sobrenomeFuncionario, dataNasc, cpfFuncionario, emailFuncionario,telefoneFuncionario, cargo, login, senha)
- VALUES ('Administrador', 'X', '1990-01-01' , '000.000.000-00', 'administrador@projetox.com', '1111111111', 'Admin', 'admin', 'admin');
+ VALUES ('Administrador', 'X', '1990-01-01' , '000.000.000-00', 'administrador@projetox.com', '(00) 0000-0000', 'Admin', 'admin', 'admin');
+ INSERT INTO Funcionario
+(nomeFuncionario, sobrenomeFuncionario, dataNasc, cpfFuncionario, emailFuncionario,telefoneFuncionario, cargo, login, senha)
+ VALUES ('Vendedor', 'X', '1990-01-01' , '000.000.000-01', 'vendedor@projetox.com', '(00) 1111-1111', 'Vendedor', 'vendedor', 'vendedor');
+ INSERT INTO Funcionario
+(nomeFuncionario, sobrenomeFuncionario, dataNasc, cpfFuncionario, emailFuncionario,telefoneFuncionario, cargo, login, senha)
+ VALUES ('Estoquista', 'X', '1990-01-01' , '000.000.000-02', 'estoquista@projetox.com', '(00) 2222-2222', 'Estoquista', 'estoquista', 'estoquista');
+ INSERT INTO Funcionario
+(nomeFuncionario, sobrenomeFuncionario, dataNasc, cpfFuncionario, emailFuncionario,telefoneFuncionario, cargo, login, senha)
+ VALUES ('Gerente', 'X', '1990-01-01' , '000.000.000-03', 'gerente@projetox.com', '(00) 3333-3333', 'Gerente', 'gerente', 'gerente');

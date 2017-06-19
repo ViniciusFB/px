@@ -50,9 +50,10 @@ public class ExcluirCliServlet extends HttpServlet {
         String nome = cliente.getNome();
 
         dao.excluirCliente((id));
+        request.setAttribute("listaClientes", dao.listar());
         request.setAttribute("cliente", "Cliente: ''" + nome + "'' foi removido com sucesso!!");
         this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/clientes.jsp").forward(request, response);
-      
+
         try {
             processRequest(request, response);
         } catch (SQLException ex) {

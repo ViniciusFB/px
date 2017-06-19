@@ -612,7 +612,7 @@ public class ProdutoDAO extends ConexaoBD {
         int soma = 0;
         PreparedStatement stmt = null;
         Connection conn = null;
-        String sql;
+        String sql = null;
         ResultSet resultados = null;
         try {
             conn = obterConexao();
@@ -643,6 +643,45 @@ public class ProdutoDAO extends ConexaoBD {
             }
         }
         return soma;
+    }
+
+    public Produto consultarPorId(int idProduto) {
+        Produto produto = new Produto();
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        String sql = "SELECT idProduto, nomeProduto, codigo, tipoProduto, quantidade, descricao, valorProduto "
+                + "FROM Produto WHERE idProduto = ?";
+
+        try {
+            conn = obterConexao();
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProduto);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                produto.setId(rs.getInt("idProduto"));
+                produto.setNome(rs.getString("nomeProduto"));
+                produto.setCodigo(rs.getInt("codigo"));
+                produto.setTipo(rs.getString("tipoProduto"));
+                produto.setQuantidade(rs.getInt("quantidade"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setValor(rs.getDouble("valorProduto"));
+            }
+        } catch (SQLException ex1) {
+            throw new RuntimeException(ex1);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex2) {
+                throw new RuntimeException(ex2);
+            }
+
+        }
+        return produto;
     }
 
 }

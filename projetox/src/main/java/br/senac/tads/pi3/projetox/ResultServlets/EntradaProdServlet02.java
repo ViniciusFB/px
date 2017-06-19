@@ -6,6 +6,8 @@
 package br.senac.tads.pi3.projetox.ResultServlets;
 
 import br.senac.tads.pi3.dao.ProdutoDAO;
+import br.senac.tads.pi3.models.Produto;
+import br.senac.tads.pi3.projetox.servlet.EntradaProdServlet01;
 import java.util.Date;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -47,24 +49,24 @@ public class EntradaProdServlet02 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sessao = request.getSession();
-        request.setAttribute("usuario", sessao.getAttribute("usuario"));
-        try {
-            ProdutoDAO dao = new ProdutoDAO();
-            int idProd = Integer.parseInt(request.getParameter("idProduto"));
-            int qtde = Integer.parseInt(request.getParameter("qtde"));
-            int qtdeAtual = dao.somaProdutoEmEstoque(idProd);
-            
-            //Atualiza a quantidade em estoque
-            dao.updateQuantidade(idProd, qtde, qtdeAtual, "Entrada");
-            request.setAttribute("entradamsg", idProd +" Entrada de produto com sucesso!!");
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entradaProduto.jsp").forward(request, response);
-
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        } catch (SQLException ex) {
-            Logger.getLogger(EntradaProdServlet02.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        HttpSession sessao = request.getSession();
+//        request.setAttribute("usuario", sessao.getAttribute("usuario"));
+//        try {
+//            ProdutoDAO dao = new ProdutoDAO();
+//            int idProd = Integer.parseInt(request.getParameter("idProduto"));
+//            int qtde = Integer.parseInt(request.getParameter("qtde"));
+//            int qtdeAtual = dao.somaProdutoEmEstoque(idProd);
+//            
+//            //Atualiza a quantidade em estoque
+//            dao.updateQuantidade(idProd, qtde, qtdeAtual, "Entrada");
+//            request.setAttribute("entradamsg", idProd +" Entrada de produto com sucesso!!");
+//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entradaProduto.jsp").forward(request, response);
+//
+//        } catch (NumberFormatException e) {
+//            System.out.println(e);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(EntradaProdServlet02.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -76,6 +78,27 @@ public class EntradaProdServlet02 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
+        boolean erro = false;
+        ProdutoDAO dao = new ProdutoDAO();
+        Produto produto = null;
+
+        try {
+            produto = new Produto((Produto) dao.obterProduto(Integer.parseInt(request.getParameter("idProduto"))));
+        } catch (NullPointerException | NumberFormatException e) {
+            System.out.println(e);
+            request.setAttribute("entradamsg", "Nenhum produto foi encontrado com o ID informado!");
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entradaProduto.jsp").forward(request, response);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EntradaProdServlet01.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        request.setAttribute("idProduto", produto.getId());
+        request.setAttribute("nomeProduto", produto.getNome());
+        request.setAttribute("qtdeEstoque", produto.getQuantidade());
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entradaProduto.jsp").forward(request, response);
 
     }
 

@@ -47,7 +47,7 @@
             </header>
 
             <section id="corpo">
-                <form method="post" action="VendaServlet02" class="form-inline">
+                <div class="form-inline">
                     <legend class="text-center">Realizar Venda</legend>
                     <fieldset>
                         <input type="hidden" name="idCliente" value="${idCliente}" id="idCliente" placeholder="ID do Cliente" class="form-control" style="width: 150px;"/>
@@ -74,9 +74,8 @@
                                         <td class="text-center"><c:out value="${produto.quantidade}" /></td>
                                         <td class="text-center"><c:out value="${produto.valor}" /></td>
 
-                                        <td style="text-align: center" id="adicionar"><a href="VendaServlet02?idProduto=${produto.id}">Adicionar</a></td>
-
-
+                                        <td style="text-align: center" id="adicionar"><a href="ControleCarrinho?acao=addProduto&idProduto=${produto.id}&idCliente=${idCliente}">Adicionar</a></td>
+                                       
                                     </tr>
                                 </c:forEach>                                                  
                             </table>
@@ -148,7 +147,7 @@
                             <button name="finalizarVenda" id="finalizarVenda" class="btn btn-success">Finalizar Venda</button></p>
                         </div>
                     </fieldset>
-                </form>
+                </div>
             </section>
             <aside id="menuLateral">
                 <ul>

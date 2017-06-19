@@ -53,7 +53,18 @@ public class CadastrarCliServlet02 extends HttpServlet {
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
 
         String nome = request.getParameter("nome");
+        nome = nome.trim();
+        if (nome == null || nome.length() < 3 || nome.equals("")) {
+            erro = true;
+            request.setAttribute("cliente", "Não foi possível cadastrar o cliente!");
+        }
+
         String sobrenome = request.getParameter("sobrenome");
+        sobrenome = sobrenome.trim();
+        if (sobrenome == null || sobrenome.length() < 3 || sobrenome.equals("")) {
+            erro = true;
+            request.setAttribute("cliente", "Não foi possível cadastrar o cliente!");
+        }
         Date dataNasc = Date.valueOf(request.getParameter("dataNasc"));
         String cpf = request.getParameter("cpf");
         String email = request.getParameter("email");
@@ -62,7 +73,7 @@ public class CadastrarCliServlet02 extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String endereco = request.getParameter("endereco");
         String genero = request.getParameter("genero");
-        
+
         if (!erro) {
             // Os dados foram preenchidos corretamente
             // Faz o fluxo POST-REDIRECT-GET para a tela de resultados
@@ -71,17 +82,12 @@ public class CadastrarCliServlet02 extends HttpServlet {
             ClienteDAO dao = new ClienteDAO();
             dao.incluirComTransacao(novo);
 
-//            UsuarioSistema usuario = new UsuarioSistema();
-//            usuario.setUsuario(cargo);
-//            usuario.setSenha(cargo);
-//            usuario.setNomeCompleto(cargo);
-//            usuario.setPapeis(cargo);
             request.setAttribute("cliente", "Cliente: ''" + request.getParameter("nome") + "'' foi cadastrado com sucesso!!");
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/cadastrarCliente.jsp").forward(request, response);
         } else {
             // Tem erro no preenchimento dos dados.
             // Reapresenta o formulário para o usuário indicando os erros.
-            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cadastrarFuncionario.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cadastrarCliente.jsp");
             dispatcher.forward(request, response);
         }
     }

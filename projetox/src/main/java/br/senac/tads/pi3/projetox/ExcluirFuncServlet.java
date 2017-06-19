@@ -50,6 +50,7 @@ public class ExcluirFuncServlet extends HttpServlet {
         String nome = funcionario.getNome();
 
         dao.excluirFuncionario((id));
+        request.setAttribute("listaFuncionarios", dao.listar());
         request.setAttribute("funcionario", "Funcionario: ''" + nome + "'' foi removido com sucesso!!");
         this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/funcionarios.jsp").forward(request, response);
       

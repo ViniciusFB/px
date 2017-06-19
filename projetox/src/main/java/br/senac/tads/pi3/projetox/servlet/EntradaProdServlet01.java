@@ -56,28 +56,28 @@ public class EntradaProdServlet01 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        boolean erro = false;
-        ProdutoDAO dao = new ProdutoDAO();
-        Produto produto = null;
-
-
-        try {
-            produto = new Produto((Produto) dao.obterProduto(Integer.parseInt(request.getParameter("idProduto"))));
-        } catch (NullPointerException | NumberFormatException e) {
-            System.out.println(e);
-            request.setAttribute("erro", "Nenhum produto foi encontrado com o ID informado!");
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entradaProduto.jsp").forward(request, response);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(EntradaProdServlet01.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        request.setAttribute("idProduto", produto.getId());
-        request.setAttribute("nomeProduto", produto.getNome());
-        request.setAttribute("qtdeEstoque", produto.getQuantidade());
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entradaProduto.jsp").forward(request, response);
+//        processRequest(request, response);
+//        boolean erro = false;
+//        ProdutoDAO dao = new ProdutoDAO();
+//        Produto produto = null;
+//
+//
+//        try {
+//            produto = new Produto((Produto) dao.obterProduto(Integer.parseInt(request.getParameter("idProduto"))));
+//        } catch (NullPointerException | NumberFormatException e) {
+//            System.out.println(e);
+//            request.setAttribute("erro", "Nenhum produto foi encontrado com o ID informado!");
+//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entradaProduto.jsp").forward(request, response);
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(EntradaProdServlet01.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        request.setAttribute("idProduto", produto.getId());
+//        request.setAttribute("nomeProduto", produto.getNome());
+//        request.setAttribute("qtdeEstoque", produto.getQuantidade());
+//
+//        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entradaProduto.jsp").forward(request, response);
     }
 
     @Override

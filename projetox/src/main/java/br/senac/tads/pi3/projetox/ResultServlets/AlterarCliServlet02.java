@@ -72,6 +72,7 @@ public class AlterarCliServlet02 extends HttpServlet {
         cliente = new Cliente(id, nome, sobrenome, dataNasc, cpf, email, telefone, estado, cidade, endereco);
 
         dao.atualizarCliente(cliente);
+        request.setAttribute("listaClientes", dao.listar());
         request.setAttribute("cliente", "Cliente: ''" + nome + "'' foi alterado com sucesso!!");
 
 //                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/estoque.jsp").forward(request, response);

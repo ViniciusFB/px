@@ -41,7 +41,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author bruno.flima4
  */
-@WebServlet("/home")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     /**
@@ -77,22 +77,27 @@ public class LoginServlet extends HttpServlet {
         try {
             funcionario = new Funcionario((Funcionario) dao.obterFuncionarioPorLogin(usuario));
 
+        } catch (NullPointerException | NumberFormatException e) {
+            System.out.println(e);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/erroLogin.jsp").forward(request, response);
+        }
+
 //            String senha = dao.selecionaHashSenha(request.getParameter("username"));
-            String senha = funcionario.getSenha();
-            sessao.setAttribute("cargo", funcionario.getCargo());
-            String senhaDigitada = request.getParameter("senha");
+        String senha = funcionario.getSenha();
+        sessao.setAttribute("cargo", funcionario.getCargo());
+        String senhaDigitada = request.getParameter("senha");
+        try {
             sessao.setAttribute("usuario", dao.selecionaNomeByLoginSenha(request.getParameter("usuario"), senha));
-
-            if (senha == null) {
-                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/erroLogin.jsp").forward(request, response);
-            } else if (senha.equals(senhaDigitada)) {
-                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
-            } else {
-                this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/erroLogin.jsp").forward(request, response);
-            }
-
         } catch (SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (senha == null) {
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/erroLogin.jsp").forward(request, response);
+        } else if (senha.equals(senhaDigitada)) {
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
+        } else {
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/erroLogin.jsp").forward(request, response);
         }
 
     }

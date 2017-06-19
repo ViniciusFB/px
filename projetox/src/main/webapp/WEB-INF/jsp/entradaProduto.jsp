@@ -44,7 +44,7 @@
             </header>
 
             <section id="corpo">
-                <form method="post" action="EntradaProdServlet01" class="form-inline">
+                <form method="post" action="EntradaProdServlet02" class="form-inline">
                     <legend>Entrada de Produto</legend>
                     <fieldset>
 
@@ -53,7 +53,7 @@
                                 <label class="input-group-addon" for="idProduto">ID do Produto: </label>
                                 <input type="text" name="idProduto" value="${idProduto}" id="idProduto" maxlength="10" placeholder="ID do Produto" class="form-control" required style="width: 150px;"/>
                             </div>
-                            <button name="validar" id="validar" class="btn btn-info">Pesquisar</button></p>
+                            <button name="pesquisar" id="pesquisar" class="btn btn-info">Pesquisar</button></p>
 
                             </br>
 
@@ -65,31 +65,25 @@
                             </br></br>
                             <div class="input-group">
                                 <label class="input-group-addon" for="qtdeEstoque">Qtd no Estoque: </label>
-                                <input type="text" name="qtdeEstoque" value="${qtdeEstoque}" id="qtdeEstoque" disabled class="form-control" style="width: 215px;"/>
-                            </div>
-
-
-                        </div>
-
-                        </br>
-                        </br>
-                        </br>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <label class="input-group-addon" for="qtde">Adicionar Qtde:</label>
-                                <input type="number" name="qtde" value="0" style="width: 200px;" min="0" max="1000" id="qtde" placeholder="Quantidade para ser adicionada" class="form-control"/>
+                                <input type="number" name="qtdeEstoque" value="${qtdeEstoque}" id="qtdeEstoque" readonly class="form-control" style="width: 215px;"/>
                             </div>
                         </div>
-
+                        </br>
+                        </br>
                     </fieldset>
                 </form>
+                <div class="input-group">
+                    <label class="input-group-addon" for="qtde">Adicionar Qtde:</label>
+                    <input type="number" name="qtde" style="width: 220px;" min="0" max="1000" id="qtde" placeholder="Quantidade para ser adicionada" class="form-control"/>
+                </div>
                 </br>
 
-                <td style="text-align: center" id="alterar"><a class="btn btn-success" href="EntradaProdServlet02?idProduto=${idProduto}">Adicionar</a></td>
+                <!--<a class="btn btn-success" href="EntradaProdServlet03?idProduto=${idProduto}&qtde=${qtde}">Adicionar</a>-->
+                <a class="btn btn-success" href='' onclick="this.href = 'EntradaProdServlet03?idProduto=${idProduto}&qtde=' + document.getElementById('qtde').value">Adicionar</a>
 
                 </br></br>
                 <p>${entradamsg}</p>
-                
+
             </section>
             <aside id="menuLateral">
                 <ul>
@@ -110,7 +104,7 @@
                             <li><a href="/projetox/CadastrarProdutoServlet01">CADASTRAR<br>PRODUTO</a></li>
                             <li><a href="/projetox/EstoqueServlet01">CONSULTAR<br>PRODUTOS</a></li>
                             <li><a href="/projetox/EntradaProdServlet01">ENTRADA<br>PRODUTOS</a></li>
-                                
+
                         </c:when>
 
                         <c:when test="${cargo=='Vendedor'}">
@@ -127,10 +121,14 @@
                 </ul>
             </aside>
 
-            <footer id="rodape">
-                <p>Copyright<!--Simbolo copyright -->&copy; 2016 - BY JAVAHELL TEAM<br></p>
-            </footer>
+
 
         </div>
     </body>
+
+    <footer class="footer">
+        <p class="text-center">Copyright &copy; 2017, ProjetoX</p>
+    </footer>
+
 </html>
+

@@ -45,120 +45,74 @@
                 </c:choose>
             </header>
             <section id="corpo">
-                <legend>Alterar Funcionário</legend>
-
-
-                <form class="form-horizontal" action="AlterarFuncServlet02" method="post" id="form_cadastro">
-
+                <form class="form-inline" action="AlterarFuncServlet02" method="post" id="form_cadastro">
                     <center>
-                        <div class="register-block">
-
-                            <table>
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >ID</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                            <input name="id" class="form-control" required type="text" value="${id}" readonly="true">
-                                        </div>
-                                    </div>
-                                </div> 
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Primeiro Nome</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input  name="nome" value="${nome}" required placeholder="Primeiro Nome" class="form-control"  type="text">
-                                        </div>
-                                    </div>
+                        <legend>Alterar Funcionário</legend>
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="id">ID Funcionario:</label>
+                                    <input  name="id" readonly="true" value="${id}" style="width:180px; margin-right: 60px;" class="form-control"  type="text">
                                 </div>
 
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >Sobrenome</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="sobrenome" value="${sobrenome}" required placeholder="Sobrenome" class="form-control"  type="text">
-                                        </div>
-                                    </div>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="cpf">CPF: </label>
+                                    <input name="cpf" readonly="true" value="${cpf}" style="width:210px; margin-right: 0px;" placeholder="000.000.000-00" class="form-control" maxlength="14" type="text" onkeypress="javascript: mascara(this, cpf_mask)">
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >Data de Nascimento</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                            <input name="dataNasc" value="${dataNasc}" required placeholder="Data de nascimento" class="form-control" min="1900-01-01" max="2017-12-31" type="Date">
-                                        </div>
-                                    </div>
+                                </br></br>
+
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="nome">Nome:</label>
+                                    <input  name="nome" required value="${nome}" placeholder="Primeiro Nome" style="width:240px; margin-right: 50px;" maxlength="50" class="form-control"  type="text">
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >CPF</label> 
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="cpf" value="${cpf}" readonly required placeholder="000.000.000-00" class="form-control" maxlength="14" type="text" onkeypress="javascript: mascara(this, cpf_mask)">
-                                        </div>
-                                    </div>
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="nome">Sobrenome:</label>
+                                    <input  name="sobrenome" required value="${sobrenome}" placeholder="Sobrenome" style="width:170px; margin-right: 0px;" maxlength="50" class="form-control"  type="text">
                                 </div>
 
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">E-Mail</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                            <input id="email" value="${email}" name="email" required placeholder="E-mail" class="form-control"  type="email">
-                                        </div>
-                                    </div>
+                                </br></br>
+
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="dataNasc">Nascimento: </label>
+                                    <input  name="dataNasc" required value="${dataNasc}" style="width:200px; margin-right: 50px;" class="form-control" min="1900-01-01" max="2017-12-31" type="date">
+                                </div>
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:100px;" for="email">E-mail: </label>
+                                    <input id="email" name="email" value="${email}" style="width:200px; margin-right: 0px;" required placeholder="E-mail" maxlength="50" class="form-control"  type="email">
+                                </div>
+
+                                </br></br>
+
+
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:200px;" for="telefone">Telefone: </label>
+                                    <input id="telefone" name="telefone" value="${telefone}" style="width:220px; margin-right: 50px;" maxlength="15" required placeholder="(xx)xxxxx-xxxx" class="form-control" type="text">
                                 </div>
 
 
-                                <!-- Text input-->
+                                <div class="input-group" style="width: 200px;">
+                                    <label class="input-group-addon" style="width:200px;" for="login">Login: </label>
+                                    <input name="login" required value="${login}" readonly class="form-control" maxlength="50" style="width:200px; margin-right:0px;" type="text">
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Telefone</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                            <input id="telefone" value="${telefone}" name="telefone" maxlength="14" required placeholder="(xx)xxxxx-xxxx" class="form-control" type="text">
-                                        </div>
-                                    </div>
                                 </div>
 
-
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Login</label>  
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="login" value="${login}" required readonly placeholder="Login" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </table>
-                        </div>
-                        <!-- Success message -->
-                        <!--<div class="alert alert-success" role="alert" id="success_message">Sucesso <i class="glyphicon glyphicon-thumbs-up"></i> Cadastro Realizado com Sucesso !!.</div>-->
-
-                        <!-- Button -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label"></label>
-                            <div class="col-md-4">
-                                <input type="submit" value='Alterar' name="alterarBotao" id="btnCadastro"/>
-                                ${funcionario}
                             </div>
-                        </div>
-
+                        </fieldset>
                     </center>
+                    </br></br>
+
+                    <div style="left: 45%; position: absolute;">
+                        <input class="btn btn-warning" type="submit" style="width: 200px;" name="alterarBotao" id="btnCadastro" value="Alterar" onclick="return validar()"/>
+                    </div>
+
+                    </br></br>
+                    </br></br>
+                    <p id="mensagem" class="text-center" style="background-color: hsla(120,100%,50%,0.3);"> ${funcionario} </p>
                 </form>
             </section>
 

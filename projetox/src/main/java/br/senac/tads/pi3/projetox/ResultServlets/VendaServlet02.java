@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -54,6 +55,7 @@ public class VendaServlet02 extends HttpServlet {
         Cliente cliente = null;
         ProdutoDAO daoP = new ProdutoDAO();
         List<Produto> produto = daoP.listar();
+//        HttpSession sessao = request.getSession();
 
         request.setAttribute("listaProdutos", produto);
 
@@ -69,6 +71,7 @@ public class VendaServlet02 extends HttpServlet {
         request.setAttribute("idCliente", cliente.getId());
         request.setAttribute("nomeCliente", cliente.getNome());
         request.setAttribute("cpfCliente", cliente.getCpf());
+//        request.setAttribute("erro", "");
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/vendas.jsp").forward(request, response);
 
