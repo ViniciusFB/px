@@ -159,7 +159,7 @@ ul li a:hover{
 .footer {
     position: absolute;
     color: whitesmoke;
-    bottom: -50%;
+    bottom: -45%;
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 30px;

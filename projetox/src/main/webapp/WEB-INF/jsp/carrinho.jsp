@@ -44,46 +44,51 @@
 
             <section id="corpo">
                 <legend class="text-center">Carrinho de Compras</legend>
-                <div id="carrinho">
-                    <table border="1" cellpadding="2" >
-                        <tr>
-                            <td bgcolor="#000088" class="text-center"><font color="white">Excluir</font></td>
-                            <td bgcolor="#000088" class="text-center"><font color="white">Item</font></td>
-                            <td bgcolor="#000088" class="text-center"><font color="white">QTD</font></td>
-                            <td bgcolor="#000088" class="text-center"><font color="white">Preço Unitário</font></td>
-                            <td bgcolor="#000088" class="text-center"><font color="white">Total Item</font></td>
-                            <td bgcolor="#000088" class="text-center"><font color="white">+1</font></td>
-                        </tr>
-                        <%
-                            //recupera os produtos do carrinho da sessao
-                            CarrinhoDeCompra carrinho = (CarrinhoDeCompra) session.getAttribute("carrinho");
-                            for (ItemDeCompra item : carrinho.getItens()) {
-                        %>
-                        <tr class="text-center">
-                            <td class="text-center"><a
-                                    href="ControleCarrinho?acao=removeProduto&idProduto=<%=item.getProduto().getId()%>&idCliente=${idCliente}">
-                                    X</td>
-                            <td class="text-center"><%=item.getProduto().getNome()%></td>
-                            <td class="text-center"><%=item.getQuantidade()%></td>
-                            <td class="text-center"><%=item.getProduto().getValor()%></td>
-                            <td class="text-center"><%=item.getTotal()%></td>
-                            <td class="text-center"><a
-                                    href="ControleCarrinho?acao=addProduto&idProduto=<%=item.getProduto().getId()%>&idCliente=${idCliente}">+</a
-                                ></td>
-                        </tr>
+                <form method="post" action="FinalizarVendaServlet01" class="form-inline">
+                    <div id="carrinho">
+                        <table border="1" cellpadding="2" >
+                            <tr>
+                                <td bgcolor="#000088" class="text-center"><font color="white">Excluir</font></td>
+                                <td bgcolor="#000088" class="text-center"><font color="white">Item</font></td>
+                                <td bgcolor="#000088" class="text-center"><font color="white">QTD</font></td>
+                                <td bgcolor="#000088" class="text-center"><font color="white">Preço Unitário</font></td>
+                                <td bgcolor="#000088" class="text-center"><font color="white">Total Item</font></td>
+                                <td bgcolor="#000088" class="text-center"><font color="white">+1</font></td>
+                            </tr>
+                            <%
+                                //recupera os produtos do carrinho da sessao
+                                CarrinhoDeCompra carrinho = (CarrinhoDeCompra) session.getAttribute("carrinho");
+                                for (ItemDeCompra item : carrinho.getItens()) {
+                            %>
+                            <tr class="text-center">
+                                <td class="text-center"><a
+                                        href="ControleCarrinho?acao=removeProduto&idProduto=<%=item.getProduto().getId()%>&idCliente=${idCliente}">
+                                        X</td>
+                                <td class="text-center"><%=item.getProduto().getNome()%></td>
+                                <td class="text-center"><%=item.getQuantidade()%></td>
+                                <td class="text-center"><%=item.getProduto().getValor()%></td>
+                                <td class="text-center"><%=item.getTotal()%></td>
+                                <td class="text-center"><a
+                                        href="ControleCarrinho?acao=addProduto&idProduto=<%=item.getProduto().getId()%>&idCliente=${idCliente}">+</a
+                                    ></td>
+                            </tr>
 
-                        <%
-                            }
-                        %>
+                            <%
+                                }
+                            %>
 
-                    </table>
+                        </table>
 
-                    <strong>Valor Total: <%=carrinho.calculaTotal()%></strong><br/>
+                        <strong>Valor Total: <%=carrinho.calculaTotal()%></strong><br/>
 
-                    <a href="VendaServlet03?idCliente=${idCliente}"> Continue comprando</a><br/>
+                        <a href="VendaServlet03?idCliente=${idCliente}"> Continue comprando</a><br/>
 
-                    <a href="ControleCarrinho?acao=cancelaCompra&idCliente=${idCliente}">Cancelar comprar</a>
-                </div>
+                        <a href="ControleCarrinho?acao=cancelaCompra&idCliente=${idCliente}">Cancelar comprar</a>
+                        <input type="hidden" name="idCliente" value="${idCliente}" id="idCliente" placeholder="ID do Cliente" class="form-control" style="width: 150px;"/>
+
+                        <input type="submit" style="float: right; margin-right: 40px" value="Finalizar Venda" class="btn btn-success" />
+                    </div>
+                </form>
             </section>
             <aside id="menuLateral">
                 <ul>
