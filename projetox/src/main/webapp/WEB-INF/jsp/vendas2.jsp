@@ -15,7 +15,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/vendas.css"/>
+        <link rel="stylesheet" type="text/css" href="css/vendas.css?1"/>
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -82,70 +82,6 @@
 
                         </div>
                         </br></br></br></br></br></br></br></br>
-                        <div id="dadosProd">
-                            <div class="input-group">
-                                <label class="input-group-addon" for="nomeProduto">Produto: </label>
-                                <input type="text" name="nomeProduto" value="${nomeProduto}" id="nomeProduto" disabled class="form-control" style="width: 200px;"/>
-                            </div>
-
-                            <div class="input-group">
-                                <label class="input-group-addon" for="codigo">Cod do Produto: </label>
-                                <input type="text" name="codigo" value="${codigo}" id="codigo" disabled class="form-control" style="width: 200px;"/>
-                            </div>
-                            </br>
-                            </br>
-                            <div class="input-group">
-                                <label class="input-group-addon" for="valorProduto">Valor: </label>
-                                <input type="text" name="valorProduto" value="${valorProduto}" id="valorProduto" disabled class="form-control" style="width: 200px;"/>
-                            </div>
-                            <label for="quantidade">Qtde: </label>
-                            <input type="text" name="quantidade" value="${quantidade}" id="quantidade" maxlength="4" class="form-control" style="width: 140px;"/>
-
-                            <button name="adicionar" id="adicionar" class="btn btn-success">Adicionar ao Carrinho</button></p>
-                        </div>
-                        <div id="carrinho" >
-                            </br>
-                            <table border="1">
-
-                                <tr>
-                                    <th class="text-center">ID</th>
-                                    <th class="text-center">NOME</th>
-                                    <th class="text-center">TIPO</th>
-                                    <th class="text-center">QTDE</th>
-                                    <th class="text-center">VALOR UNI.</th>
-                                    <th class="text-center">TOTAL</th>
-                                    <th class="text-center"></th>
-                                </tr>
-
-                                <c:forEach items="${listaProdutos}" var="produto">
-                                    <tr> 
-
-                                        <td class="text-center"><c:out value="${produto.id}" /></td>
-                                        <td class="text-center"><c:out value="${produto.nome}" /></td>
-                                        <td class="text-center"><c:out value="${produto.tipo}" /></td>
-                                        <td class="text-center"><c:out value="${produto.quantidade}" /></td>
-                                        <td class="text-center"><c:out value="${produto.valor}" /></td>
-                                        <td class="text-center"><c:out value="${produto.valor}" /></td>
-
-                                        <td style="text-align: center" id="adicionar"><a id="add" href="VendaServlet02?idProduto=${produto.id}">REMOVER</a></td>
-
-
-                                    </tr>
-                                </c:forEach>                                                  
-                            </table>
-
-                        </div>
-                        <div id="dadosVenda">
-                            <div class="input-group">
-                                <label class="input-group-addon" for="valorTotal">Valor Total: </label>
-                                <input type="text" name="valorTotal" value="${valorTotal}" id="valorTotal" disabled class="form-control" style="width: 200px;"/>
-                            </div>
-                            <div class="input-group">
-                                <label class="input-group-addon" for="data">Data: </label>
-                                <input type="text" name="data" value="${data}" id="data" disabled class="form-control" style="width: 200px;"/>
-                            </div>
-                            <button name="finalizarVenda" id="finalizarVenda" class="btn btn-success">Finalizar Venda</button></p>
-                        </div>
                     </fieldset>
                 </div>
             </section>

@@ -165,7 +165,7 @@ ul li a:hover{
     margin-left: 3%;
     position: absolute;
     top: 40%;
-    height: 200px;
+    height: 500px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -184,8 +184,8 @@ ul li a:hover{
     margin: auto;
     margin-left: 3%;
     position: absolute;
-    top: 73%;
-    height: 150px;
+    top: 40%;
+    height: 450px;
     overflow-y: auto;
     overflow-x: hidden;
 }

@@ -73,27 +73,38 @@ CREATE TABLE Filial (
     dataVenda TIMESTAMP NOT NULL,
     valorFinal DOUBLE NOT NULL,
     FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente),
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto),
-    FOREIGN KEY (valorFinal) REFERENCES Produto(Valor)
+    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
 );
 
-create table Relatorio(
-    idRelatorio INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    nmProduto VARCHAR(50) NOT NULL,
-    nmCliente VARCHAR(50) NOT NULL,
-    tipoProduto VARCHAR(50) NOT NULL
-    venda TIMESTAMP NOT NULL,
-    vlFinal DOUBLE NOT NULL,
-    valorProduto DOUBLE NOT NULL,
-    quantProduto INT NOT NULL
-    FOREIGN KEY (nomeProduto) REFERENCES Produto(nomeProduto),
-    FOREIGN KEY(nomeCliente) REFERENCES Cliente(nomeCliente),
-    FOREIGN KEY (tipoProduto) REFERENCES Produto(tipo),
-    FOREIGN KEY (venda) REFERENCES Venda(dataVenda),
-    FOREIGN KEY (vlFinal) REFERENCES Venda(valorFinal),
-    FOREIGN KEY(valorProduto) REFERENCES Produto(valorProduto),
-    FOREIGN KEY(quantProduto) REFERENCES Produto(quantidade)
-);
+-- create table VendaProd(
+--    idVendaProd INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+--    idVenda INTEGER NOT NULL,
+--    idProduto INTEGER NOT NULL,
+--    nomeProduto VARCHAR(50) NOT NULL,
+--    quantidade INT NOT NULL,
+--    PRIMARY KEY (idVendaProd),
+--    FOREIGN KEY (idVenda) REFERENCES Venda(idVenda),
+--    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+-- );
+
+-- 
+-- create table Relatorio(
+--     idRelatorio INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+--     nmProduto VARCHAR(50) NOT NULL,
+--     nmCliente VARCHAR(50) NOT NULL,
+--     tipoProduto VARCHAR(50) NOT NULL
+--     venda TIMESTAMP NOT NULL,
+--     vlFinal DOUBLE NOT NULL,
+--     valorProduto DOUBLE NOT NULL,
+--     quantProduto INT NOT NULL
+--     FOREIGN KEY (nomeProduto) REFERENCES Produto(nomeProduto),
+--     FOREIGN KEY(nomeCliente) REFERENCES Cliente(nomeCliente),
+--     FOREIGN KEY (tipoProduto) REFERENCES Produto(tipo),
+--     FOREIGN KEY (venda) REFERENCES Venda(dataVenda),
+--     FOREIGN KEY (vlFinal) REFERENCES Venda(valorFinal),
+--     FOREIGN KEY(valorProduto) REFERENCES Produto(valorProduto),
+--     FOREIGN KEY(quantProduto) REFERENCES Produto(quantidade)
+-- );
 
 create table ProdutosExcluidos(
     idProduto INT NOT NULL UNIQUE,
